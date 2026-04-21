@@ -7,7 +7,6 @@ public class PaintLine extends JPanel {
 
     public PaintLine() {
         this.yHistory = new ArrayList<>();
-        yHistory.add(540);
     }
 
     public void paint(int change) {
@@ -26,7 +25,7 @@ public class PaintLine extends JPanel {
 
 
         for (int i = 1; i < yHistory.size() - 1; i++) {
-            x_now =  x_before + 200;
+            x_now =  x_before + 50;
             y_now = yHistory.get(i);
             y_before = yHistory.get(i - 1);
 
