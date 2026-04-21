@@ -9,9 +9,10 @@ public class PaintLine extends JPanel {
         this.yHistory = new ArrayList<>();
     }
 
-    public void paint(int change) {
-        yHistory.add(yHistory.getLast() + change);
+    public void paint(ArrayList<Integer> yHistoryInput) {
+        yHistory = yHistoryInput;
         this.repaint();
+        System.out.println(yHistory);
     }
 
     @Override
@@ -23,8 +24,7 @@ public class PaintLine extends JPanel {
         int y_now;
         int y_before;
 
-
-        for (int i = 1; i < yHistory.size() - 1; i++) {
+        for (int i = 1; i < yHistory.size(); i++) {
             x_now =  x_before + 50;
             y_now = yHistory.get(i);
             y_before = yHistory.get(i - 1);
