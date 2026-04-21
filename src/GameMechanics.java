@@ -1,12 +1,12 @@
 import java.util.Random;
 
 public class GameMechanics {
-    Random rnd;
+    private final Random rnd;
     public GameMechanics() {
         rnd = new Random();
     }
 
     public int change(){
-        return  rnd.nextInt(-100, 100);
+        return  rnd.nextInt(-400, 400);
     }
 }
