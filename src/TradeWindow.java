@@ -1,16 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class TradeWindow extends JFrame {
     private final PaintLine paintLine;
     private final GameMechanics gameMechanics;
-    private final ArrayList<Integer> yHistory;
 
-    public TradeWindow() {
-        this.gameMechanics = new GameMechanics();
+    public TradeWindow(GameMechanics gameMechanics) {
         this.paintLine = new PaintLine();
-        this.yHistory = new ArrayList<>();
+        this.gameMechanics = gameMechanics;
     }
 
     public void init() {
@@ -27,12 +24,12 @@ public class TradeWindow extends JFrame {
     }
 
     public void update() {
-        yHistory.add(gameMechanics.change());
-        paintLine.paint(yHistory);
+        gameMechanics.addNextNumber();
+        paintLine.paint(gameMechanics.get_yHistory());
     }
 
     public void run() {
-        yHistory.add(getHeight());
+        gameMechanics.addTo_yHistory(getHeight());
 
         Timer timer = new Timer(1000, e -> update());
         timer.start();

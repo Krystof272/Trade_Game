@@ -1,15 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class PaintLine extends JPanel {
-    private ArrayList<Integer> yHistory;
+    private LinkedList<Integer> yHistory;
 
     public PaintLine() {
-        this.yHistory = new ArrayList<>();
+        this.yHistory = new LinkedList<>();
     }
 
-    public void paint(ArrayList<Integer> yHistoryInput) {
+    public void paint(LinkedList<Integer> yHistoryInput) {
         yHistory = yHistoryInput;
         this.repaint();
         System.out.println(yHistory);

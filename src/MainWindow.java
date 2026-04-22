@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
+    private final GameMechanics gameMechanics;
 
     public MainWindow() {
+        this.gameMechanics = new GameMechanics();
     }
 
     public void init() {
@@ -24,7 +26,7 @@ public class MainWindow extends JFrame {
 
         button.addActionListener(e -> {
             dispose();
-            new TradeWindow().init();
+            new TradeWindow(gameMechanics).init();
         });
 
 
