@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class PaintLine extends JPanel {
@@ -13,12 +12,12 @@ public class PaintLine extends JPanel {
     public void paint(LinkedList<Integer> yHistoryInput) {
         yHistory = yHistoryInput;
         this.repaint();
-        System.out.println(yHistory);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.translate(0, getHeight() - 2);
 
         int x_before = 0;
         int x_now;
@@ -26,20 +25,19 @@ public class PaintLine extends JPanel {
         int y_before;
 
         for (int i = 1; i < yHistory.size(); i++) {
-            x_now =  x_before + 50;
+            x_now =  x_before + getWidth() / 7;
             y_now = yHistory.get(i);
             y_before = yHistory.get(i - 1);
 
-            if (y_now < y_before) {
+            if (y_now > y_before) {
                 g.setColor(Color.GREEN);
             } else {
                 g.setColor(Color.RED);
             }
 
-            g.drawLine(x_before, y_before, x_now, y_now);
+            g.drawLine(x_before, -y_before, x_now, -y_now);
 
             x_before = x_now;
         }
     }
-
 }
