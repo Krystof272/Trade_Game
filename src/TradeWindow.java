@@ -15,18 +15,34 @@ public class TradeWindow extends JFrame {
     public void init() {
         setTitle("Trade Window");
         setLayout(new BorderLayout());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         add(paintLine, BorderLayout.CENTER);
 
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
 
         b1.setEnabled(false);
-        add(b1, BorderLayout.EAST);
+        CustomButton.changeRed(b1);
+        panel.add(b1, BorderLayout.EAST);
+
+        JButton b2 = new JButton("<--");
+        CustomButton.changeRed(b2);
+        panel.add(b2, BorderLayout.WEST);
+
+        add(panel, BorderLayout.NORTH);
 
 
         b1.addActionListener(e -> {
+            CustomButton.changeRed(b1);
             b1.setEnabled(false);
             run();
+        });
+
+        b2.addActionListener(e -> {
+            dispose();
+            new MainWindow().init();
         });
 
         setVisible(true);
@@ -45,6 +61,7 @@ public class TradeWindow extends JFrame {
             } else {
                 ((Timer) e.getSource()).stop();
                 b1.setEnabled(true);
+                CustomButton.changeGreen(b1);
             }
         });
         timer.start();
