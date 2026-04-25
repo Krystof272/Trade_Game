@@ -14,14 +14,14 @@ public class GameMechanics {
     }
 
     public void addNextNumber() {
-        int number = yHistory.getLast() + rnd.nextInt( -200, 200);
+        int number = yHistory.getLast() + rnd.nextInt( -100, 300);
 
         if (number < yHistory.getFirst()) {
             number = yHistory.getFirst();
         }
         yHistory.add(number);
 
-        if (number > height - 30) {
+        if (number > height - 70) {
             insreaseRatio();
         }
     }
