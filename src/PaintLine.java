@@ -24,20 +24,38 @@ public class PaintLine extends JPanel {
         int y_now;
         int y_before;
 
-        for (int i = 1; i < yHistory.size(); i++) {
-            x_now =  x_before + getWidth() / 7;
-            y_now = yHistory.get(i);
-            y_before = yHistory.get(i - 1);
+        if (yHistory.size() > 7) {
+            for (int i = 0; i < 7; i++) {
+                x_now = x_before + getWidth() / 7;
+                y_now = yHistory.get(yHistory.size() - 7 + i);
+                y_before = yHistory.get(yHistory.size() - 8 + i);
 
-            if (y_now > y_before) {
-                g.setColor(Color.GREEN);
-            } else {
-                g.setColor(Color.RED);
+                if (y_now > y_before) {
+                    g.setColor(Color.GREEN);
+                } else {
+                    g.setColor(Color.RED);
+                }
+
+                g.drawLine(x_before, -y_before, x_now, -y_now);
+
+                x_before = x_now;
             }
+        } else {
+            for (int i = 1; i < yHistory.size(); i++) {
+                x_now = x_before + getWidth() / 7;
+                y_now = yHistory.get(i);
+                y_before = yHistory.get(i - 1);
 
-            g.drawLine(x_before, -y_before, x_now, -y_now);
+                if (y_now > y_before) {
+                    g.setColor(Color.GREEN);
+                } else {
+                    g.setColor(Color.RED);
+                }
 
-            x_before = x_now;
+                g.drawLine(x_before, -y_before, x_now, -y_now);
+
+                x_before = x_now;
+            }
         }
     }
 }
