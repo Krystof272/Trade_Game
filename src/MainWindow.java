@@ -7,9 +7,10 @@ public class MainWindow extends MyWindow {
     private JLabel label;
 
     public MainWindow() {
-        this.gameMechanics = new GameMechanics();
+        this.gameMechanics = new GameMechanics(getUserName());
         this.button2 = new JButton("Next Week");
-        this.label = new JLabel("Price: ↓" + gameMechanics.get_yHistory().getLast());
+        //this.label = new JLabel("Price: ↓" + gameMechanics.getStocks().getFirst().getNumbers().getLast());
+        this.label = new JLabel();
     }
 
     public void init() {
@@ -35,14 +36,12 @@ public class MainWindow extends MyWindow {
 
         northPanel.add(panel1);
 
-        add(northPanel, BorderLayout.NORTH);
-
 
         CustomButton.changeGreen(button2);
         southPanel.add(button2);
 
         add(southPanel, BorderLayout.SOUTH);
-
+        add(northPanel, BorderLayout.NORTH);
 
         button1.addActionListener(e -> {
             dispose();
@@ -65,13 +64,21 @@ public class MainWindow extends MyWindow {
     }
 
     public void updateText() {
-        int price = gameMechanics.get_yHistory().getLast();
-        if (price > gameMechanics.get_yHistory().get(gameMechanics.get_yHistory().size() - 2)) {
+        int price = gameMechanics.getStocks().getFirst().getNumbers().getLast();
+        if (price > gameMechanics.getStocks().getFirst().getNumbers().get(gameMechanics.getStocks().getFirst().getNumbers().size() - 2)) {
             label.setForeground(Color.GREEN);
             label.setText("Price: ↑" + price);
         } else {
             label.setForeground(Color.RED);
             label.setText("Price: ↓" + price);
         }
+    }
+
+    public String getUserName() {
+        String name = null;
+        while (name == null || name.isEmpty()) {
+            name = JOptionPane.showInputDialog(null, "Please enter your name:", "Name input",  JOptionPane.QUESTION_MESSAGE);
+        }
+        return name;
     }
 }
