@@ -22,8 +22,7 @@ public class TradeWindow extends MyWindow {
 
         add(paintLine, BorderLayout.CENTER);
 
-        JPanel northPanel = new JPanel();
-        northPanel.setLayout(new BorderLayout());
+        JPanel northPanel = new JPanel(new BorderLayout());
 
         JButton buttonBack = new JButton("←");
         CustomButton.changeRed(buttonBack);
