@@ -22,29 +22,29 @@ public class MainWindow extends MyWindow {
         setLayout(new BorderLayout());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        JPanel northPanel = new JPanel();
-        JPanel southPanel = new JPanel();
+        JPanel dashboardPanel = new JPanel();
 
         for (int i = 0; i < stocks.size(); i++) {
             stockPanels.add(new StockPanel(new JButton("Detailed view"), new JLabel("Price: " + stocks.get(i).getNumbers().getLast()), new JLabel(stocks.get(i).getName())));
             stockPanels.get(i).init();
-            northPanel.add(stockPanels.get(i));
+            dashboardPanel.add(stockPanels.get(i));
 
             int finalI = i;
             stockPanels.get(i).getButton().addActionListener(e -> {
                 dispose();
-                new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers()).init(stocks);
+                new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers()).init(stocks, stocks.get(finalI).getName());
             });
         }
         if (stocks.getFirst().getNumbers().size() > 1){
             updateText();
         }
 
+        JPanel southPanel = new JPanel();
         CustomButton.changeGreen(button2);
         southPanel.add(button2);
 
         add(southPanel, BorderLayout.SOUTH);
-        add(northPanel, BorderLayout.NORTH);
+        add(dashboardPanel, BorderLayout.NORTH);
 
 
         button2.addActionListener(e -> {
