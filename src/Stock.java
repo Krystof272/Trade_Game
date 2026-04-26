@@ -3,7 +3,7 @@ import java.util.LinkedList;
 public class Stock {
     private String name;
     private int fluctuation;
-    private LinkedList<Integer> numbers = new LinkedList<>();
+    private LinkedList<Integer> numbers ;
 
     public Stock(String name, int fluctuation) {
         this.name = name;
@@ -14,5 +14,13 @@ public class Stock {
 
     public LinkedList<Integer> getNumbers() {
         return numbers;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getFluctuation() {
+        return fluctuation;
     }
 }
