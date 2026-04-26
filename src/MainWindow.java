@@ -1,16 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class MainWindow extends MyWindow {
-    private final GameMechanics gameMechanics;
+    private GameMechanics gameMechanics;
     private JButton button2;
-    private JLabel label;
+    private ArrayList<StockPanel> stockPanels;
+    private ArrayList<Stock> stocks;
 
-    public MainWindow() {
-        this.gameMechanics = new GameMechanics(getUserName());
+    public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks){
+        this.gameMechanics = gameMechanics;
         this.button2 = new JButton("Next Week");
-        //this.label = new JLabel("Price: ↓" + gameMechanics.getStocks().getFirst().getNumbers().getLast());
-        this.label = new JLabel();
+        this.stockPanels = new ArrayList<>();
+        this.stocks = stocks;
     }
 
     public void init() {
@@ -22,20 +25,20 @@ public class MainWindow extends MyWindow {
         JPanel northPanel = new JPanel();
         JPanel southPanel = new JPanel();
 
-        JPanel panel1 = new JPanel();
-        panel1.setLayout(new BorderLayout());
+        for (int i = 0; i < stocks.size(); i++) {
+            stockPanels.add(new StockPanel(new JButton("Detailed view"), new JLabel("Price: " + stocks.get(i).getNumbers().getLast()), new JLabel(stocks.get(i).getName())));
+            stockPanels.get(i).init();
+            northPanel.add(stockPanels.get(i));
 
-        JButton button1 = new JButton("Detailed view");
-        CustomButton.changeBlue(button1);
-        panel1.add(button1, BorderLayout.SOUTH);
-
-        label.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-        label.setForeground(Color.RED);
-        panel1.add(label, BorderLayout.NORTH);
-
-
-        northPanel.add(panel1);
-
+            int finalI = i;
+            stockPanels.get(i).getButton().addActionListener(e -> {
+                dispose();
+                new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers()).init(stocks);
+            });
+        }
+        if (stocks.getFirst().getNumbers().size() > 1){
+            updateText();
+        }
 
         CustomButton.changeGreen(button2);
         southPanel.add(button2);
@@ -43,10 +46,6 @@ public class MainWindow extends MyWindow {
         add(southPanel, BorderLayout.SOUTH);
         add(northPanel, BorderLayout.NORTH);
 
-        button1.addActionListener(e -> {
-            dispose();
-            new TradeWindow(gameMechanics).init();
-        });
 
         button2.addActionListener(e -> {
             button2.setEnabled(false);
@@ -64,21 +63,21 @@ public class MainWindow extends MyWindow {
     }
 
     public void updateText() {
-        int price = gameMechanics.getStocks().getFirst().getNumbers().getLast();
-        if (price > gameMechanics.getStocks().getFirst().getNumbers().get(gameMechanics.getStocks().getFirst().getNumbers().size() - 2)) {
-            label.setForeground(Color.GREEN);
-            label.setText("Price: ↑" + price);
-        } else {
-            label.setForeground(Color.RED);
-            label.setText("Price: ↓" + price);
-        }
-    }
+        int priceNow;
+        int priceBefore;
+        LinkedList<Integer> yHistory;
+        for (int i = 0; i < stockPanels.size(); i++) {
+            yHistory = stocks.get(i).getNumbers();
+            priceNow = yHistory.getLast();
+            priceBefore = yHistory.get(yHistory.size() - 2);
 
-    public String getUserName() {
-        String name = null;
-        while (name == null || name.isEmpty()) {
-            name = JOptionPane.showInputDialog(null, "Please enter your name:", "Name input",  JOptionPane.QUESTION_MESSAGE);
+            if (priceNow > priceBefore) {
+                stockPanels.get(i).getLabelPrice().setForeground(Color.GREEN);
+                stockPanels.get(i).getLabelPrice().setText("Price: ↑" + priceNow);
+            } else {
+                stockPanels.get(i).getLabelPrice().setForeground(Color.RED);
+                stockPanels.get(i).getLabelPrice().setText("Price: ↓" + priceNow);
+            }
         }
-        return name;
     }
 }
