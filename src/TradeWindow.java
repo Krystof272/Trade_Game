@@ -47,12 +47,12 @@ public class TradeWindow extends MyWindow{
         setVisible(true);
 
         gameMechanics.setHeight(getHeight());
-        paintLine.paint(gameMechanics.get_yHistory());
+        paintLine.paint(gameMechanics.getStocks().getFirst().getNumbers());
     }
 
     @Override
     public void update() {
         gameMechanics.addNextNumber();
-        paintLine.paint(gameMechanics.get_yHistory());
+        paintLine.paint(gameMechanics.getStocks().getFirst().getNumbers());
     }
 }
