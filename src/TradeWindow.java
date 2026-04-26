@@ -3,20 +3,18 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class TradeWindow extends MyWindow{
-    private PaintLine paintLine;
+public class TradeWindow extends MyWindow {
+    private final PaintLine paintLine;
     private final GameMechanics gameMechanics;
-    private LinkedList<Integer> yHistory;
-    private JButton button1;
+    private final LinkedList<Integer> yHistory;
 
     public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput) {
         this.paintLine = new PaintLine();
         this.gameMechanics = gameMechanics;
-        this.button1 = new JButton("Next Week");
         this.yHistory = yHistoryInput;
     }
 
-    public void init(ArrayList<Stock> stocks) {
+    public void init(ArrayList<Stock> stocks, String shareName) {
         setTitle("Trade Window");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -24,26 +22,39 @@ public class TradeWindow extends MyWindow{
 
         add(paintLine, BorderLayout.CENTER);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BorderLayout());
 
-        CustomButton.changeGreen(button1);
-        panel.add(button1, BorderLayout.EAST);
+        JButton buttonBack = new JButton("←");
+        CustomButton.changeRed(buttonBack);
+        JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        leftPanel.add(buttonBack);
 
-        JButton button2 = new JButton("←");
-        CustomButton.changeRed(button2);
-        panel.add(button2, BorderLayout.WEST);
+        JButton buttonNextweek = new JButton("Next Week");
+        CustomButton.changeGreen(buttonNextweek);
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        rightPanel.add(buttonNextweek);
 
-        add(panel, BorderLayout.NORTH);
+        JPanel gridPanel = new JPanel(new GridLayout(1, 3));
+        gridPanel.add(leftPanel);
+
+        JLabel labelShareName = new JLabel(shareName, SwingConstants.CENTER);
+        labelShareName.setFont(new Font("Times New Roman", Font.BOLD, 35));
+        gridPanel.add(labelShareName);
+
+        gridPanel.add(rightPanel);
+
+        northPanel.add(gridPanel, BorderLayout.CENTER);
+        add(northPanel, BorderLayout.NORTH);
 
 
-        button1.addActionListener(e -> {
-            CustomButton.changeRed(button1);
-            button1.setEnabled(false);
-            run(button1);
+        buttonNextweek.addActionListener(e -> {
+            CustomButton.changeRed(buttonNextweek);
+            buttonNextweek.setEnabled(false);
+            run(buttonNextweek);
         });
 
-        button2.addActionListener(e -> {
+        buttonBack.addActionListener(e -> {
             dispose();
             new MainWindow(gameMechanics, stocks).init();
         });
