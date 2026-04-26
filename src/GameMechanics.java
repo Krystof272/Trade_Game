@@ -3,23 +3,19 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class GameMechanics {
-    private final Random rnd;
-    private final ArrayList<Stock> stocks;
     private int height;
-    private Player player;
+    private ArrayList<Stock> stocks;
 
-    public GameMechanics(String name) {
-        this.rnd = new Random();
-        this.stocks = new ArrayList<>();
-        stocks.add(new Stock("Nvidia", 1));
+    public GameMechanics(ArrayList<Stock> stocks) {
         this.height = 0;
-        this.player = new Player(name);
+        this.stocks = stocks;
     }
 
     public void addNextNumber() {
+        Random rnd = new Random();
         int number;
         for (Stock stock : stocks) {
-            number = stock.getNumbers().getLast() + rnd.nextInt(-100, 300);
+            number = stock.getNumbers().getLast() + rnd.nextInt(-100, 300) * stock.getFluctuation();
 
             if (number < stock.getNumbers().getFirst()) {
                 number = stock.getNumbers().getFirst();
@@ -30,10 +26,6 @@ public class GameMechanics {
                 insreaseRatio(stock.getNumbers());
             }
         }
-    }
-
-    public ArrayList<Stock> getStocks() {
-        return stocks;
     }
 
     public void insreaseRatio(LinkedList<Integer> yHistory) {
