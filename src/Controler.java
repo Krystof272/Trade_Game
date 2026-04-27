@@ -8,12 +8,14 @@ public class Controler {
 
     public Controler() {
         this.stocks = new ArrayList<>();
-        this.gameMechanics = new GameMechanics(stocks);
         this.player = new Player(getUserNameInput());
+        this.gameMechanics = new GameMechanics(stocks, player);
+
 
         stocks.add(new Stock("Nvidia", 2));
         stocks.add(new Stock("AMD", 1));
-        stocks.add(new Stock("Intel", 5));
+        stocks.add(new Stock("Intel", 3));
+        stocks.add(new Stock("Vitkovium", 5));
     }
 
     public void init() {
