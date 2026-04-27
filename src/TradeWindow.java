@@ -22,6 +22,46 @@ public class TradeWindow extends MyWindow {
 
         add(paintLine, BorderLayout.CENTER);
 
+        southButtonsInit(shareName);
+        northComponentsInit(stocks, shareName);
+
+        setVisible(true);
+
+        gameMechanics.setHeight(getHeight());
+        paintLine.paint(yHistory);
+    }
+
+    @Override
+    public void update() {
+        gameMechanics.addNextNumber();
+        paintLine.paint(yHistory);
+    }
+
+    public void southButtonsInit(String shareName){
+        JPanel southPanel = new JPanel();
+
+        JButton buyButton = new JButton("Buy");
+        CustomButton.changeBlue(buyButton);
+        southPanel.add(buyButton);
+
+
+
+        JButton sellButton = new JButton("Sell");
+        CustomButton.changeBlue(sellButton);
+        southPanel.add(sellButton);
+
+        add(southPanel, BorderLayout.SOUTH);
+
+        buyButton.addActionListener(e -> {
+            gameMechanics.buy1Stock(shareName, yHistory.getLast());
+        });
+
+        sellButton.addActionListener(e -> {
+            gameMechanics.sell1Stock(shareName, yHistory.getLast());
+        });
+    }
+
+    public void northComponentsInit(ArrayList<Stock> stocks, String shareName){
         JPanel northPanel = new JPanel(new BorderLayout());
 
         JButton buttonBack = new JButton("←");
@@ -57,16 +97,5 @@ public class TradeWindow extends MyWindow {
             dispose();
             new MainWindow(gameMechanics, stocks).init();
         });
-
-        setVisible(true);
-
-        gameMechanics.setHeight(getHeight());
-        paintLine.paint(yHistory);
-    }
-
-    @Override
-    public void update() {
-        gameMechanics.addNextNumber();
-        paintLine.paint(yHistory);
     }
 }
