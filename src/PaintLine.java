@@ -17,7 +17,10 @@ public class PaintLine extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.translate(0, getHeight() - 2);
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setStroke(new BasicStroke(3));
+        g2d.translate(0, getHeight() - 2);
 
         int x_before = 0;
         int x_now;
@@ -31,12 +34,12 @@ public class PaintLine extends JPanel {
                 y_before = yHistory.get(yHistory.size() - 8 + i);
 
                 if (y_now > y_before) {
-                    g.setColor(Color.GREEN);
+                    g2d.setColor(Color.GREEN);
                 } else {
-                    g.setColor(Color.RED);
+                    g2d.setColor(Color.RED);
                 }
 
-                g.drawLine(x_before, -y_before, x_now, -y_now);
+                g2d.drawLine(x_before, -y_before, x_now, -y_now);
 
                 x_before = x_now;
             }
@@ -47,12 +50,12 @@ public class PaintLine extends JPanel {
                 y_before = yHistory.get(i - 1);
 
                 if (y_now > y_before) {
-                    g.setColor(Color.GREEN);
+                    g2d.setColor(Color.GREEN);
                 } else {
-                    g.setColor(Color.RED);
+                    g2d.setColor(Color.RED);
                 }
 
-                g.drawLine(x_before, -y_before, x_now, -y_now);
+                g2d.drawLine(x_before, -y_before, x_now, -y_now);
 
                 x_before = x_now;
             }
