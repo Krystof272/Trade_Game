@@ -19,7 +19,9 @@ public class Controler {
     }
 
     public void init() {
-        new MainWindow(gameMechanics, stocks, player).init();
+        MainWindow m = new MainWindow(gameMechanics, stocks, player);
+        m.init();
+        m.firstStart();
     }
 
     public String getUserNameInput() {
