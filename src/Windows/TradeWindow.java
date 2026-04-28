@@ -120,6 +120,7 @@ public class TradeWindow extends MyWindow {
         });
 
         sell5x.addActionListener(e -> {
+            //TODO fix money glitch bug
            gameMechanics.sellStock(shareName, yHistory.getLast(), 5);
            updateText();
         });
