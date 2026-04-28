@@ -71,6 +71,10 @@ public class TradeWindow extends MyWindow {
         CustomButton.changeBlue35(buyMax);
         southPanel.add(buyMax);
 
+        JButton buy5x = new JButton("Buy 5x");
+        CustomButton.changeBlue35(buy5x);
+        southPanel.add(buy5x);
+
         JButton buyButton = new JButton("Buy");
         CustomButton.changeBlue35(buyButton);
         southPanel.add(buyButton);
@@ -80,13 +84,17 @@ public class TradeWindow extends MyWindow {
         CustomButton.changeBlue35(sellButton);
         southPanel.add(sellButton);
 
+        JButton sell5x = new JButton("Sell 5x");
+        CustomButton.changeBlue35(sell5x);
+        southPanel.add(sell5x);
+
         JButton sellMax = new JButton("Sell Max");
         CustomButton.changeBlue35(sellMax);
         southPanel.add(sellMax);
 
         add(southPanel, BorderLayout.SOUTH);
 
-        disabledButtons.add(buyMax);
+        disabledButtons.add(sell5x);
         disabledButtons.add(buyButton);
         disabledButtons.add(sellButton);
         disabledButtons.add(sellMax);
@@ -96,14 +104,24 @@ public class TradeWindow extends MyWindow {
             updateText();
         });
 
+        buy5x.addActionListener(e -> {
+            gameMechanics.buyStock(shareName, yHistory.getLast(), 5);
+            updateText();
+        });
+
         buyButton.addActionListener(e -> {
-            gameMechanics.buyStock(shareName, yHistory.getLast(), 1);
+            new BuyDialog(this, gameMechanics, player, shareName, yHistory.getLast());
             updateText();
         });
 
         sellButton.addActionListener(e -> {
-            gameMechanics.sellStock(shareName, yHistory.getLast(), 1);
+            new SellDialog(this, gameMechanics, player, shareName, yHistory.getLast());
             updateText();
+        });
+
+        sell5x.addActionListener(e -> {
+           gameMechanics.sellStock(shareName, yHistory.getLast(), 5);
+           updateText();
         });
 
         sellMax.addActionListener(e -> {
@@ -156,9 +174,7 @@ public class TradeWindow extends MyWindow {
         disabledButtons.add(buttonNextweek);
         disabledButtons.add(buttonBack);
 
-        buttonNextweek.addActionListener(e -> {
-            run(disabledButtons);
-        });
+        buttonNextweek.addActionListener(e -> run(disabledButtons));
 
         buttonBack.addActionListener(e -> {
             dispose();
