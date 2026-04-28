@@ -8,12 +8,14 @@ public class MainWindow extends MyWindow {
     private JButton button2;
     private ArrayList<StockPanel> stockPanels;
     private ArrayList<Stock> stocks;
+    private Player player;
 
-    public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks){
+    public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks,  Player player) {
         this.gameMechanics = gameMechanics;
         this.button2 = new JButton("Next Week");
         this.stockPanels = new ArrayList<>();
         this.stocks = stocks;
+        this.player = player;
     }
 
     public void init() {
@@ -25,14 +27,14 @@ public class MainWindow extends MyWindow {
         JPanel dashboardPanel = new JPanel();
 
         for (int i = 0; i < stocks.size(); i++) {
-            stockPanels.add(new StockPanel(new JButton("Detailed view"), new JLabel("Price: " + stocks.get(i).getNumbers().getLast()), new JLabel(stocks.get(i).getName())));
+            stockPanels.add(new StockPanel(new JButton("Detailed view"), new JLabel("Price: " + stocks.get(i).getNumbers().getLast()), new JLabel(stocks.get(i).getName() +"     ["+ player.getAmountOfStocksOwned(stocks.get(i).getName()) +"]")));
             stockPanels.get(i).init();
             dashboardPanel.add(stockPanels.get(i));
 
             int finalI = i;
             stockPanels.get(i).getButton().addActionListener(e -> {
                 dispose();
-                new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers()).init(stocks, stocks.get(finalI).getName());
+                new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers(), player, stocks.get(finalI).getName()).init(stocks);
             });
         }
         if (stocks.getFirst().getNumbers().size() > 1){
