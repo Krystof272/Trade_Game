@@ -79,9 +79,7 @@ public class MainWindow extends MyWindow {
         add(southPanel, BorderLayout.SOUTH);
         add(dashboardPanel, BorderLayout.NORTH);
 
-        button2.addActionListener(e -> {
-            run(disabledButtons);
-        });
+        button2.addActionListener(e -> run(disabledButtons));
 
         setVisible(true);
     }
