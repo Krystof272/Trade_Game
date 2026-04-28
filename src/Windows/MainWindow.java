@@ -1,7 +1,15 @@
+package Windows;
+
+import GameMechanics.GameMechanics;
+import Others.CustomButton;
+import Others.MyWindow;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import GameMechanics.Player;
+import GameMechanics.Stock;
 
 public class MainWindow extends MyWindow {
     private final GameMechanics gameMechanics;
@@ -11,7 +19,7 @@ public class MainWindow extends MyWindow {
     private final Player player;
     private final ArrayList<JButton> disabledButtons;
 
-    public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks,  Player player) {
+    public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks, Player player) {
         this.gameMechanics = gameMechanics;
         this.button2 = new JButton("Next Week");
         this.stockPanels = new ArrayList<>();

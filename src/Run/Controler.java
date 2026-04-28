@@ -1,3 +1,10 @@
+package Run;
+
+import GameMechanics.GameMechanics;
+import Windows.MainWindow;
+import GameMechanics.Player;
+import GameMechanics.Stock;
+
 import javax.swing.*;
 import java.util.ArrayList;
 

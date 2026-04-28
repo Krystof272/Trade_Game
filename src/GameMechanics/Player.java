@@ -1,9 +1,11 @@
+package GameMechanics;
+
 import java.util.HashMap;
 
 public class Player {
-    private String name;
+    private final String name;
     private int money;
-    private HashMap<String, Integer> stocksOwned;
+    private final HashMap<String, Integer> stocksOwned;
 
     public Player(String name) {
         this.name = name;
@@ -48,7 +50,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
+        return "GameMechanics.Player{" +
                 "name='" + name + '\'' +
                 ", money=" + money +
                 ", stocksOwned=" + stocksOwned +

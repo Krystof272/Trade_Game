@@ -1,3 +1,11 @@
+package Windows;
+
+import Others.CustomButton;
+import Others.MyWindow;
+import GameMechanics.GameMechanics;
+import GameMechanics.Player;
+import GameMechanics.Stock;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

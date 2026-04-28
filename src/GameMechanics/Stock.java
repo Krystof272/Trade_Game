@@ -1,9 +1,11 @@
+package GameMechanics;
+
 import java.util.LinkedList;
 
 public class Stock {
-    private String name;
-    private int fluctuation;
-    private LinkedList<Integer> numbers ;
+    private final String name;
+    private final int fluctuation;
+    private final LinkedList<Integer> numbers ;
 
     public Stock(String name, int fluctuation) {
         this.name = name;
