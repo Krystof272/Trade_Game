@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class MainWindow extends MyWindow {
-    private GameMechanics gameMechanics;
-    private JButton button2;
-    private ArrayList<StockPanel> stockPanels;
-    private ArrayList<Stock> stocks;
-    private Player player;
-    private ArrayList<JButton> disabledButtons;
+    private final GameMechanics gameMechanics;
+    private final JButton button2;
+    private final ArrayList<StockPanel> stockPanels;
+    private final ArrayList<Stock> stocks;
+    private final Player player;
+    private final ArrayList<JButton> disabledButtons;
 
     public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks,  Player player) {
         this.gameMechanics = gameMechanics;

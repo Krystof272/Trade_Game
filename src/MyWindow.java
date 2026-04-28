@@ -9,7 +9,7 @@ public abstract class MyWindow extends JFrame {
             button.setEnabled(true);
         }
         CustomButton.changeGreen(buttons.getFirst());
-    };
+    }
 
     public void run(ArrayList<JButton> buttons) {
         for (JButton button : buttons) {

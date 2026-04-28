@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class GameMechanics {
     private int height;
-    private ArrayList<Stock> stocks;
-    private Player player;
+    private final ArrayList<Stock> stocks;
+    private final Player player;
 
     public GameMechanics(ArrayList<Stock> stocks, Player player) {
         this.height = 0;

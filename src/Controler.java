@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Controler {
-    private GameMechanics gameMechanics;
-    private Player player;
-    private ArrayList<Stock> stocks;
+    private final GameMechanics gameMechanics;
+    private final Player player;
+    private final ArrayList<Stock> stocks;
 
     public Controler() {
         this.stocks = new ArrayList<>();

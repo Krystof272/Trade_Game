@@ -7,12 +7,12 @@ public class TradeWindow extends MyWindow {
     private final PaintLine paintLine;
     private final GameMechanics gameMechanics;
     private final LinkedList<Integer> yHistory;
-    private String shareName;
-    private JLabel playerMoney;
-    private JLabel stocksOwned;
-    private Player player;
-    private JLabel stockPrice;
-    private ArrayList<JButton> disabledButtons;
+    private final String shareName;
+    private final JLabel playerMoney;
+    private final JLabel stocksOwned;
+    private final Player player;
+    private final JLabel stockPrice;
+    private final ArrayList<JButton> disabledButtons;
 
     public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput, Player player, String shareName) {
         this.paintLine = new PaintLine();

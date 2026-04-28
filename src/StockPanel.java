@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StockPanel extends JPanel {
-    private JButton button;
-    private JLabel labelPrice;
-    private JLabel labelName;
+    private final JButton button;
+    private final JLabel labelPrice;
+    private final JLabel labelName;
 
     public StockPanel(JButton button, JLabel labelPrice, JLabel labelName) {
         this.button = button;
@@ -23,10 +23,6 @@ public class StockPanel extends JPanel {
         labelName.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 
         CustomButton.changeBlue20(button);
-    }
-
-    public JButton getButton() {
-        return button;
     }
 
     public JLabel getLabelPrice() {
