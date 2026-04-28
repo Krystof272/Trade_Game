@@ -22,7 +22,7 @@ public class StockPanel extends JPanel {
         labelPrice.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         labelName.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 
-        CustomButton.changeBlue(button);
+        CustomButton.changeBlue18(button);
     }
 
     public JButton getButton() {
