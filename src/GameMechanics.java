@@ -13,20 +13,18 @@ public class GameMechanics {
         this.player = player;
     }
 
-    public void buy1Stock(String shareName, int price){
-        if (player.getMoney() > price){
-            player.addStock(shareName, 1);
-            player.setMoney(player.getMoney() - price);
+    public void buyStock(String shareName, int price, int amount) {
+        if (player.getMoney() >= price * amount) {
+            player.addStock(shareName, amount);
+            player.setMoney(player.getMoney() - price * amount);
         }
-        System.out.println(player +"\nshare: "+ shareName +", price: "+ price);
     }
 
-    public void sell1Stock(String shareName, int price){
-            if (player.isStockOwned(shareName)) {
-                player.substractStock(shareName, 1);
-                player.setMoney(player.getMoney() + price);
-            }
-        System.out.println(player +"\nshare: "+ shareName +", price: "+ price);
+    public void sellStock(String shareName, int price, int amount) {
+        if (player.isStockOwned(shareName)) {
+            player.substractStock(shareName, amount);
+            player.setMoney(player.getMoney() + price * amount);
+        }
     }
 
     public void addNextNumber() {
@@ -40,13 +38,14 @@ public class GameMechanics {
             }
             stock.getNumbers().add(number);
 
-            if (number > height - 100) {
+            if (number > height - 190) {
                 increaseRatio(stock.getNumbers());
             }
         }
     }
 
     public void increaseRatio(LinkedList<Integer> yHistory) {
+        //TODO change this function/move, problem: number always < 900 (height of window)
         for (int i = 1; i < yHistory.size(); i++) {
             int number = yHistory.get(i) / 2;
 
