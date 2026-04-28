@@ -9,6 +9,7 @@ public class MainWindow extends MyWindow {
     private ArrayList<StockPanel> stockPanels;
     private ArrayList<Stock> stocks;
     private Player player;
+    private ArrayList<JButton> disabledButtons;
 
     public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks,  Player player) {
         this.gameMechanics = gameMechanics;
@@ -16,6 +17,13 @@ public class MainWindow extends MyWindow {
         this.stockPanels = new ArrayList<>();
         this.stocks = stocks;
         this.player = player;
+        this.disabledButtons = new ArrayList<>();
+    }
+
+    public void firstStart(){
+        button2.setEnabled(false);
+        CustomButton.changeRed(button2);
+        run(disabledButtons);
     }
 
     public void init() {
@@ -24,15 +32,34 @@ public class MainWindow extends MyWindow {
         setLayout(new BorderLayout());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        JPanel dashboardPanel = new JPanel();
+        JPanel southPanel = new JPanel(new GridLayout(1, 5));
+        southPanel.add(new JPanel());
+        southPanel.add(new JPanel());
 
+        CustomButton.changeGreen(button2);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(button2);
+        southPanel.add(buttonPanel);
+        disabledButtons.add(button2);
+
+        JLabel playerMoneyLabel = new JLabel("Money: " + player.getMoney());
+        playerMoneyLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        JPanel playerMoneyPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        playerMoneyPanel.add(playerMoneyLabel);
+        southPanel.add(playerMoneyPanel);
+
+        southPanel.add(new JPanel());
+
+        JPanel dashboardPanel = new JPanel();
         for (int i = 0; i < stocks.size(); i++) {
-            stockPanels.add(new StockPanel(new JButton("Detailed view"), new JLabel("Price: " + stocks.get(i).getNumbers().getLast()), new JLabel(stocks.get(i).getName() +"     ["+ player.getAmountOfStocksOwned(stocks.get(i).getName()) +"]")));
+            JButton detailedView = new JButton("Detailed View");
+            stockPanels.add(new StockPanel(detailedView, new JLabel("Price: " + stocks.get(i).getNumbers().getLast()), new JLabel(stocks.get(i).getName() +"     ["+ player.getAmountOfStocksOwned(stocks.get(i).getName()) +"]")));
             stockPanels.get(i).init();
             dashboardPanel.add(stockPanels.get(i));
+            disabledButtons.add(detailedView);
 
             int finalI = i;
-            stockPanels.get(i).getButton().addActionListener(e -> {
+            detailedView.addActionListener(e -> {
                 dispose();
                 new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers(), player, stocks.get(finalI).getName()).init(stocks);
             });
@@ -41,18 +68,11 @@ public class MainWindow extends MyWindow {
             updateText();
         }
 
-        JPanel southPanel = new JPanel();
-        CustomButton.changeGreen(button2);
-        southPanel.add(button2);
-
         add(southPanel, BorderLayout.SOUTH);
         add(dashboardPanel, BorderLayout.NORTH);
 
-
         button2.addActionListener(e -> {
-            button2.setEnabled(false);
-            CustomButton.changeRed(button2);
-            run(button2);
+            run(disabledButtons);
         });
 
         setVisible(true);
