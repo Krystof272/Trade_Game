@@ -19,7 +19,7 @@ public class Controler {
     }
 
     public void init() {
-        new MainWindow(gameMechanics, stocks).init();
+        new MainWindow(gameMechanics, stocks, player).init();
     }
 
     public String getUserNameInput() {
