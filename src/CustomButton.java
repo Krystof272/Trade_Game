@@ -20,10 +20,19 @@ public class CustomButton {
         button.setBorderPainted(false);
     }
 
-    public static void changeBlue(JButton button) {
+    public static void changeBlue18(JButton button) {
         button.setBackground(new Color(33, 85, 255, 255));
         button.setForeground(Color.BLACK);
         button.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+    }
+
+    public static void changeBlue35(JButton button) {
+        button.setBackground(new Color(33, 85, 255, 255));
+        button.setForeground(Color.BLACK);
+        button.setFont(new Font("Times New Roman", Font.PLAIN, 35));
 
         button.setFocusPainted(false);
         button.setBorderPainted(false);
