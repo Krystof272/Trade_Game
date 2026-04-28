@@ -12,6 +12,7 @@ public class TradeWindow extends MyWindow {
     private JLabel stocksOwned;
     private Player player;
     private JLabel stockPrice;
+    private ArrayList<JButton> disabledButtons;
 
     public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput, Player player, String shareName) {
         this.paintLine = new PaintLine();
@@ -22,6 +23,7 @@ public class TradeWindow extends MyWindow {
         this.playerMoney = new JLabel("Money: " + player.getMoney());
         this.stocksOwned = new JLabel("Owned: " + player.getAmountOfStocksOwned(shareName));
         this.stockPrice = new JLabel("" + yHistory.getLast());
+        this.disabledButtons = new ArrayList<>();
     }
 
     public void init(ArrayList<Stock> stocks) {
@@ -32,8 +34,8 @@ public class TradeWindow extends MyWindow {
 
         add(paintLine, BorderLayout.CENTER);
 
-        southComponentsInit();
         northComponentsInit(stocks);
+        southComponentsInit();
 
         setVisible(true);
 
@@ -75,6 +77,11 @@ public class TradeWindow extends MyWindow {
         southPanel.add(sellMax);
 
         add(southPanel, BorderLayout.SOUTH);
+
+        disabledButtons.add(buyMax);
+        disabledButtons.add(buyButton);
+        disabledButtons.add(sellButton);
+        disabledButtons.add(sellMax);
 
         buyMax.addActionListener(e -> {
             gameMechanics.buyStock(shareName, yHistory.getLast(), player.getMoney() / yHistory.getLast());
@@ -130,21 +137,19 @@ public class TradeWindow extends MyWindow {
         gridPanel.add(namePriceStock);
 
         stocksOwned.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-        //stocksOwned.setHorizontalAlignment(SwingConstants.CENTER);
         JPanel rightCenterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 13));
         rightCenterPanel.add(stocksOwned);
         gridPanel.add(rightCenterPanel);
 
         gridPanel.add(rightPanel);
-
         northPanel.add(gridPanel, BorderLayout.CENTER);
         add(northPanel, BorderLayout.NORTH);
 
+        disabledButtons.add(buttonNextweek);
+        disabledButtons.add(buttonBack);
 
         buttonNextweek.addActionListener(e -> {
-            CustomButton.changeRed(buttonNextweek);
-            buttonNextweek.setEnabled(false);
-            run(buttonNextweek);
+            run(disabledButtons);
         });
 
         buttonBack.addActionListener(e -> {
