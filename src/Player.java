@@ -39,6 +39,13 @@ public class Player {
         return stocksOwned.containsKey(shareName);
     }
 
+    public int getAmountOfStocksOwned(String shareName) {
+        if (isStockOwned(shareName)) {
+            return stocksOwned.get(shareName);
+        }
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
