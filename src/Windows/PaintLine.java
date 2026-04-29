@@ -2,17 +2,21 @@ package Windows;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class PaintLine extends JPanel {
     private LinkedList<Integer> yHistory;
+    private ArrayList<Integer> date;
 
     public PaintLine() {
         this.yHistory = new LinkedList<>();
+        this.date = new ArrayList<>();
     }
 
-    public void paint(LinkedList<Integer> yHistoryInput) {
+    public void paint(LinkedList<Integer> yHistoryInput, ArrayList<Integer> dateInput) {
         yHistory = yHistoryInput;
+        date = dateInput;
         this.repaint();
     }
 
@@ -23,9 +27,12 @@ public class PaintLine extends JPanel {
         g2d.setStroke(new BasicStroke(3));
         g2d.translate(0, getHeight() - 2);
 
+        int topOffset = 130;
+        int countIncreasedRatio = 1;
         for (int i = 0; i < 7; i++) {
-            if (yHistory.get(i) > getHeight() - 260) {
+            if (yHistory.get(yHistory.size() - 7 + i) > getHeight() - topOffset) {
                 increaseRatio(yHistory);
+                countIncreasedRatio++;
             }
         }
 
@@ -34,21 +41,23 @@ public class PaintLine extends JPanel {
         int y_now;
         int y_before;
 
+        int y_Date = -5;
+        int y_Xaxis = y_Date - 40;
+        int y_GraphLineOfset = y_Xaxis - 5;
+        g2d.drawLine(0, y_Xaxis, getWidth(), y_Xaxis);
+
+        g2d.setFont(new Font("Times New Roman", Font.PLAIN, 25));
         for (int i = 0; i < 7; i++) {
             x_now = x_before + getWidth() / 7;
             y_now = yHistory.get(yHistory.size() - 7 + i);
             y_before = yHistory.get(yHistory.size() - 8 + i);
 
-            if (y_now > y_before) {
-                g2d.setColor(Color.GREEN);
-            } else {
-                g2d.setColor(Color.RED);
-            }
-
-            g2d.drawLine(x_before, -y_before, x_now, -y_now);
+            xAxis(g2d, i, x_now, y_Xaxis, y_Date);
+            graphLine(g2d, y_now, y_before, x_now, x_before, y_GraphLineOfset);
 
             x_before = x_now;
         }
+        yAxis(g2d, y_GraphLineOfset, topOffset, countIncreasedRatio);
     }
 
     public void increaseRatio(LinkedList<Integer> yHistory) {
@@ -59,6 +68,38 @@ public class PaintLine extends JPanel {
                 number = 10;
             }
             yHistory.set(i, number);
+        }
+    }
+
+    public void graphLine(Graphics g2d, int y_now, int y_before, int x_now, int x_before, int y_GraphLineOfset) {
+        if (y_now > y_before) {
+            g2d.setColor(Color.GREEN);
+        } else {
+            g2d.setColor(Color.RED);
+        }
+
+        g2d.drawLine(x_before, -y_before + y_GraphLineOfset, x_now, -y_now + y_GraphLineOfset);
+    }
+
+    public void xAxis(Graphics g2d, int i, int x_now, int y_Xaxis, int yDate) {
+        g2d.setColor(Color.BLACK);
+        g2d.drawLine(x_now, y_Xaxis + 10, x_now, y_Xaxis - 10);
+
+        g2d.drawString(date.get(0) + i + "." + date.get(1) + "." + date.get(2), x_now - 50, yDate);
+    }
+
+    public void yAxis(Graphics g2d, int yStart, int topOffset, int countIncreasedRatio) {
+        g2d.setColor(Color.BLACK);
+        int amount = 4;
+        int yOffset = -(getHeight() - yStart - topOffset) / amount;
+        int y_now = yStart + yOffset;
+        int xValue = 80;
+
+        g2d.drawLine(xValue, 0, xValue, -getHeight());
+        for (int i = 0; i < amount; i++) {
+            g2d.drawString(String.valueOf((225 * (i + 1)) * countIncreasedRatio), 5, y_now + 7);
+            g2d.drawLine(xValue - 10, y_now, xValue + 10, y_now);
+            y_now += yOffset;
         }
     }
 }
