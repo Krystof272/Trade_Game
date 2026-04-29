@@ -9,6 +9,7 @@ import GameMechanics.Stock;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class TradeWindow extends MyWindow {
@@ -48,13 +49,13 @@ public class TradeWindow extends MyWindow {
         setVisible(true);
 
         gameMechanics.setHeight(getHeight());
-        paintLine.paint(yHistory);
+        paintLine.paint(yHistory, new ArrayList<>(Arrays.asList(13, 6, 2009)));
     }
 
     @Override
     public void update() {
         gameMechanics.addNextNumber();
-        paintLine.paint(yHistory);
+        paintLine.paint(yHistory, new ArrayList<>(Arrays.asList(13, 6, 2009)));
         updateText();
     }
 
