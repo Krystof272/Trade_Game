@@ -23,40 +23,28 @@ public class GameMechanics {
     }
 
     public void sellStock(String shareName, int price, int amount) {
+        if (amount > player.getAmountOfStocksOwned(shareName)) {
+            amount = player.getAmountOfStocksOwned(shareName);
+        }
         if (player.isStockOwned(shareName)) {
             player.substractStock(shareName, amount);
             player.setMoney(player.getMoney() + price * amount);
         }
     }
 
-    public void addNextNumber() {
+    public void addNextNumber()
+
+    {
         Random rnd = new Random();
         int number;
         for (Stock stock : stocks) {
-            number = stock.getNumbers().getLast() + rnd.nextInt(-100, 200) * stock.getFluctuation();
+            number = stock.getNumbers().getLast() + (rnd.nextInt(-100, 100) * stock.getFluctuation());
 
             if (number < 10) {
                 number = 10;
             }
             stock.getNumbers().add(number);
-
-            if (number > height - 190) {
-                increaseRatio(stock.getNumbers());
-            }
         }
-    }
-
-    public void increaseRatio(LinkedList<Integer> yHistory) {
-        //TODO change this function/move, problem: number always < 900 (height of window)
-        for (int i = 1; i < yHistory.size(); i++) {
-            int number = yHistory.get(i) / 2;
-
-            if (number < yHistory.getFirst()) {
-                number = yHistory.getFirst();
-            }
-            yHistory.set(i, number);
-        }
-
     }
 
     public void setHeight(int height) {
