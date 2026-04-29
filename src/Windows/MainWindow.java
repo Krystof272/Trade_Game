@@ -35,6 +35,7 @@ public class MainWindow extends MyWindow {
     }
 
     public void init() {
+        //TODO add image backgounr
         setTitle("Trade Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
