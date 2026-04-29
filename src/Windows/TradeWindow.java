@@ -94,9 +94,11 @@ public class TradeWindow extends MyWindow {
 
         add(southPanel, BorderLayout.SOUTH);
 
-        disabledButtons.add(sell5x);
+        disabledButtons.add(buyMax);
+        disabledButtons.add(buy5x);
         disabledButtons.add(buyButton);
         disabledButtons.add(sellButton);
+        disabledButtons.add(sell5x);
         disabledButtons.add(sellMax);
 
         buyMax.addActionListener(e -> {
@@ -120,7 +122,6 @@ public class TradeWindow extends MyWindow {
         });
 
         sell5x.addActionListener(e -> {
-            //TODO fix money glitch bug
            gameMechanics.sellStock(shareName, yHistory.getLast(), 5);
            updateText();
         });
