@@ -1,6 +1,7 @@
 package GameMechanics;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Stock {
     private final String name;
@@ -11,7 +12,9 @@ public class Stock {
         this.name = name;
         this.fluctuation = fluctuation;
         this.numbers = new LinkedList<>();
-        numbers.add(0);
+
+        Random rnd = new Random();
+        numbers.add(rnd.nextInt(1000));
     }
 
     public LinkedList<Integer> getNumbers() {

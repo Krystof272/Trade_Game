@@ -9,7 +9,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.money = 2000;
+        this.money = 500;
         this.stocksOwned = new HashMap<>();
     }
 
