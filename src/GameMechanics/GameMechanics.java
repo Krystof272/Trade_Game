@@ -35,20 +35,20 @@ public class GameMechanics {
         for (Stock stock : stocks) {
             number = stock.getNumbers().getLast() + (rnd.nextInt(-100, 100) * stock.getFluctuation());
 
-            if (number < 10 || number < player.getMoney() / 2) {
+            if (number < 10) {
                 number = 10;
             }
             stock.getNumbers().add(number);
         }
     }
 
-    public ArrayList<Integer> updateDate(ArrayList<Integer> date){
+    public ArrayList<Integer> updateDate(ArrayList<Integer> date) {
         date.set(0, date.get(0) + 1);
-        if (date.getFirst() > 30){
+        if (date.getFirst() > 30) {
             date.set(0, 1);
             date.set(1, date.get(1) + 1);
         }
-        if (date.get(1) > 12){
+        if (date.get(1) > 12) {
             date.set(1, 1);
             date.set(2, date.get(2) + 1);
         }
