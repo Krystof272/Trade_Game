@@ -1,5 +1,7 @@
 package Windows;
 
+import GameMechanics.GameMechanics;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,15 +10,17 @@ import java.util.LinkedList;
 public class PaintLine extends JPanel {
     private LinkedList<Integer> yHistory;
     private ArrayList<Integer> date;
+    private GameMechanics gameMechanics;
 
     public PaintLine() {
         this.yHistory = new LinkedList<>();
         this.date = new ArrayList<>();
     }
 
-    public void paint(LinkedList<Integer> yHistoryInput, ArrayList<Integer> dateInput) {
-        yHistory = yHistoryInput;
+    public void paint(LinkedList<Integer> yHistoryInput, ArrayList<Integer> dateInput, GameMechanics gameMechanics) {
+        this.yHistory.addAll(yHistoryInput);
         date = dateInput;
+        this.gameMechanics = gameMechanics;
         this.repaint();
     }
 
@@ -62,7 +66,7 @@ public class PaintLine extends JPanel {
             y_now = yHistory.get(yHistory.size() - 7 + i);
             y_before = yHistory.get(yHistory.size() - 8 + i);
 
-            xAxis(g2d, i, x_now, y_Xaxis, y_Date);
+            xAxis(g2d, x_now, y_Xaxis, y_Date);
             graphLine(g2d, y_now, y_before, x_now, x_before, y_GraphLineOfset);
 
             x_before = x_now;
@@ -91,19 +95,11 @@ public class PaintLine extends JPanel {
         g2d.drawLine(x_before, -y_before + y_GraphLineOfset, x_now, -y_now + y_GraphLineOfset);
     }
 
-    public void xAxis(Graphics g2d, int i, int x_now, int y_Xaxis, int yDate) {
+    public void xAxis(Graphics g2d, int x_now, int y_Xaxis, int yDate) {
         g2d.setColor(Color.BLACK);
         g2d.drawLine(x_now, y_Xaxis + 10, x_now, y_Xaxis - 10);
 
-        date.set(0, date.get(0) + 1);
-        if (date.getFirst() > 30) {
-            date.set(0, 1);
-            date.set(1, date.get(1) + 1);
-        }
-        if (date.get(1) > 12) {
-            date.set(1, 1);
-            date.set(2, date.get(2) + 1);
-        }
+        date = gameMechanics.updateDate(date);
         g2d.drawString(date.get(0) + "." + date.get(1) + "." + date.get(2), x_now - 50, yDate);
     }
 
