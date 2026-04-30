@@ -26,6 +26,8 @@ public class StockPanel extends JPanel {
         labelPrice.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         labelName.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 
+        setOpaque(false);
+
         CustomButton.changeBlue20(button);
     }
 
