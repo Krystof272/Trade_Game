@@ -9,7 +9,6 @@ import GameMechanics.Stock;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class TradeWindow extends MyWindow {
@@ -22,8 +21,9 @@ public class TradeWindow extends MyWindow {
     private final Player player;
     private final JLabel stockPrice;
     private final ArrayList<JButton> disabledButtons;
+    private ArrayList<Integer> date;
 
-    public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput, Player player, String shareName) {
+    public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput, Player player, String shareName, ArrayList<Integer> date) {
         this.paintLine = new PaintLine();
         this.gameMechanics = gameMechanics;
         this.yHistory = yHistoryInput;
@@ -33,6 +33,7 @@ public class TradeWindow extends MyWindow {
         this.stocksOwned = new JLabel("Owned: " + player.getAmountOfStocksOwned(shareName));
         this.stockPrice = new JLabel("" + yHistory.getLast());
         this.disabledButtons = new ArrayList<>();
+        this.date = date;
     }
 
     public void init(ArrayList<Stock> stocks) {
@@ -48,14 +49,14 @@ public class TradeWindow extends MyWindow {
 
         setVisible(true);
 
-        gameMechanics.setHeight(getHeight());
-        paintLine.paint(yHistory, new ArrayList<>(Arrays.asList(13, 6, 2009)));
+        paintLine.paint(yHistory, date);
     }
 
     @Override
     public void update() {
         gameMechanics.addNextNumber();
-        paintLine.paint(yHistory, new ArrayList<>(Arrays.asList(13, 6, 2009)));
+        date = gameMechanics.updateDate(date);
+        paintLine.paint(yHistory, date);
         updateText();
     }
 
@@ -181,7 +182,7 @@ public class TradeWindow extends MyWindow {
 
         buttonBack.addActionListener(e -> {
             dispose();
-            new MainWindow(gameMechanics, stocks, player).init();
+            new MainWindow(gameMechanics, stocks, player, date).init();
         });
     }
 }
