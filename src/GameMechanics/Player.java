@@ -13,6 +13,7 @@ public class Player {
         this.stocksOwned = new HashMap<>();
     }
 
+    //TODO nicer money look 1 000 000
     public int getMoney() {
         return money;
     }
@@ -46,14 +47,5 @@ public class Player {
             return stocksOwned.get(shareName);
         }
         return 0;
-    }
-
-    @Override
-    public String toString() {
-        return "GameMechanics.Player{" +
-                "name='" + name + '\'' +
-                ", money=" + money +
-                ", stocksOwned=" + stocksOwned +
-                '}';
     }
 }
