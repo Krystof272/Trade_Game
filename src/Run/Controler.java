@@ -25,6 +25,12 @@ public class Controler {
         stocks.add(new Stock("AMD", 1));
         stocks.add(new Stock("Intel", 3));
         stocks.add(new Stock("Vitkovium", 5));
+        stocks.add(new Stock("Apple", 1));
+        stocks.add(new Stock("Samsung", 3));
+        stocks.add(new Stock("Qualcomm", 2));
+        stocks.add(new Stock("Prusa", 1));
+        stocks.add(new Stock("Bambu Lab", 4));
+        stocks.add(new Stock("Microslop", 2));
     }
 
     public void init() {
