@@ -61,7 +61,7 @@ public class TradeWindow extends MyWindow {
     }
 
     public void updateText() {
-        playerMoney.setText("Money: " + player.getMoney());
+        playerMoney.setText("Money: " + player.getMoneyText());
         stocksOwned.setText("Owned: " + player.getAmountOfStocksOwned(shareName));
         stockPrice.setText("" + yHistory.getLast());
     }
