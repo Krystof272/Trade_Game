@@ -49,14 +49,14 @@ public class TradeWindow extends MyWindow {
 
         setVisible(true);
 
-        paintLine.paint(yHistory, date);
+        paintLine.paint(yHistory, date, gameMechanics);
     }
 
     @Override
     public void update() {
         gameMechanics.addNextNumber();
         date = gameMechanics.updateDate(date);
-        paintLine.paint(yHistory, date);
+        paintLine.paint(yHistory, date, gameMechanics);
         updateText();
     }
 
