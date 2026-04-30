@@ -62,7 +62,8 @@ public class MainWindow extends MyWindow {
         southPanel.setOpaque(false);
         southPanel.add(new JPanel() {{ setOpaque(false); }});
 
-        dateLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        dateLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        dateLabel.setOpaque(true);
         southPanel.add(dateLabel);
 
         CustomButton.changeGreen(button2);
@@ -73,9 +74,9 @@ public class MainWindow extends MyWindow {
         disabledButtons.add(button2);
 
         JLabel playerMoneyLabel = new JLabel("Money: " + player.getMoneyText());
-        playerMoneyLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        playerMoneyLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        playerMoneyLabel.setBackground(Color.WHITE);
         JPanel playerMoneyPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        playerMoneyPanel.setOpaque(false);
         playerMoneyPanel.add(playerMoneyLabel);
         southPanel.add(playerMoneyPanel);
 
