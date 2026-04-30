@@ -13,7 +13,24 @@ public class Player {
         this.stocksOwned = new HashMap<>();
     }
 
-    //TODO nicer money look 1 000 000
+    public String getMoneyText(){
+        String moneyText = String.valueOf(money);
+        String moneyTemp = "";
+        int a = 1;
+        for (int i = moneyText.length() - 1; i > -1; i--) {
+            moneyTemp += moneyText.charAt(i);
+            if (a % 3 == 0) {
+                moneyTemp += " ";
+            }
+            a++;
+        }
+        moneyText = "";
+        for (int i = moneyTemp.length() - 1; i > -1; i--) {
+            moneyText += moneyTemp.charAt(i);
+        }
+        return moneyText;
+    }
+
     public int getMoney() {
         return money;
     }
