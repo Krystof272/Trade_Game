@@ -27,6 +27,16 @@ public class PaintLine extends JPanel {
         g2d.setStroke(new BasicStroke(3));
         g2d.translate(0, getHeight() - 2);
 
+        date.set(0, date.getFirst() - 7);
+        if (date.getFirst() < 1) {
+            date.set(0, 30 + date.getFirst());
+            date.set(1, date.get(1) - 1);
+        }
+        if (date.get(1) < 1) {
+            date.set(1, 12);
+            date.set(2, date.get(2) - 1);
+        }
+
         int topOffset = 130;
         int countIncreasedRatio = 1;
         for (int i = 0; i < 7; i++) {
@@ -85,7 +95,16 @@ public class PaintLine extends JPanel {
         g2d.setColor(Color.BLACK);
         g2d.drawLine(x_now, y_Xaxis + 10, x_now, y_Xaxis - 10);
 
-        g2d.drawString(date.get(0) + i + "." + date.get(1) + "." + date.get(2), x_now - 50, yDate);
+        date.set(0, date.get(0) + 1);
+        if (date.getFirst() > 30) {
+            date.set(0, 1);
+            date.set(1, date.get(1) + 1);
+        }
+        if (date.get(1) > 12) {
+            date.set(1, 1);
+            date.set(2, date.get(2) + 1);
+        }
+        g2d.drawString(date.get(0) + "." + date.get(1) + "." + date.get(2), x_now - 50, yDate);
     }
 
     public void yAxis(Graphics g2d, int yStart, int topOffset, int countIncreasedRatio) {
