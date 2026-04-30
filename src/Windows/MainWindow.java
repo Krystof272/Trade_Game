@@ -3,6 +3,7 @@ package Windows;
 import GameMechanics.GameMechanics;
 import Others.CustomButton;
 import Others.MyWindow;
+import Others.BackgroundPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import GameMechanics.Player;
 import GameMechanics.Stock;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class MainWindow extends MyWindow {
     private final GameMechanics gameMechanics;
@@ -39,33 +42,47 @@ public class MainWindow extends MyWindow {
     }
 
     public void init() {
-        //TODO add image backgounr
         setTitle("Trade Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        JPanel southPanel = new JPanel(new GridLayout(1, 5));
-        southPanel.add(new JPanel());
+        Image backgroundImage = null;
+        try {
+            backgroundImage = ImageIO.read(new File("resources/desktop-win7.png"));
+        } catch (Exception e) {
+            System.err.println("Could not load background image: " + e.getMessage());
+            e.printStackTrace();
+        }
 
-        dateLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        BackgroundPanel backgroundPanel = new BackgroundPanel(backgroundImage);
+        backgroundPanel.setLayout(new BorderLayout());
+        setContentPane(backgroundPanel);
+
+        JPanel southPanel = new JPanel(new GridLayout(1, 5));
+        southPanel.setOpaque(false);
+        southPanel.add(new JPanel() {{ setOpaque(false); }});
+
+        dateLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
         southPanel.add(dateLabel);
 
         CustomButton.changeGreen(button2);
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
         buttonPanel.add(button2);
         southPanel.add(buttonPanel);
         disabledButtons.add(button2);
 
-        JLabel playerMoneyLabel = new JLabel("Money: " + player.getMoney());
-        playerMoneyLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        JLabel playerMoneyLabel = new JLabel("Money: " + player.getMoneyText());
+        playerMoneyLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
         JPanel playerMoneyPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        playerMoneyPanel.setOpaque(false);
         playerMoneyPanel.add(playerMoneyLabel);
         southPanel.add(playerMoneyPanel);
 
-        southPanel.add(new JPanel());
+        southPanel.add(new JPanel() {{ setOpaque(false); }});
 
         JPanel dashboardPanel = new JPanel();
+        dashboardPanel.setOpaque(false);
         for (int i = 0; i < stocks.size(); i++) {
             JButton detailedView = new JButton("Detailed View");
             stockPanels.add(new StockPanel(detailedView, new JLabel("Price: " + stocks.get(i).getNumbers().getLast()), new JLabel(stocks.get(i).getName() +"     ["+ player.getAmountOfStocksOwned(stocks.get(i).getName()) +"]")));
@@ -82,9 +99,9 @@ public class MainWindow extends MyWindow {
         if (stocks.getFirst().getNumbers().size() > 1){
             updateText();
         }
-
-        add(southPanel, BorderLayout.SOUTH);
-        add(dashboardPanel, BorderLayout.NORTH);
+        
+        backgroundPanel.add(southPanel, BorderLayout.SOUTH);
+        backgroundPanel.add(dashboardPanel, BorderLayout.CENTER);
 
         button2.addActionListener(e -> run(disabledButtons));
 
