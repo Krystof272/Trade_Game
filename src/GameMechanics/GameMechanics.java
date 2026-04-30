@@ -1,16 +1,13 @@
 package GameMechanics;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 
 public class GameMechanics {
-    private int height;
     private final ArrayList<Stock> stocks;
     private final Player player;
 
     public GameMechanics(ArrayList<Stock> stocks, Player player) {
-        this.height = 0;
         this.stocks = stocks;
         this.player = player;
     }
@@ -32,9 +29,7 @@ public class GameMechanics {
         }
     }
 
-    public void addNextNumber()
-
-    {
+    public void addNextNumber() {
         Random rnd = new Random();
         int number;
         for (Stock stock : stocks) {
@@ -47,7 +42,16 @@ public class GameMechanics {
         }
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public ArrayList<Integer> updateDate(ArrayList<Integer> date){
+        date.set(0, date.get(0) + 1);
+        if (date.getFirst() > 30){
+            date.set(0, 1);
+            date.set(1, date.get(1) + 1);
+        }
+        if (date.get(1) > 12){
+            date.set(1, 1);
+            date.set(2, date.get(2) + 1);
+        }
+        return date;
     }
 }
