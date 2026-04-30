@@ -7,17 +7,19 @@ import GameMechanics.Stock;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Controler {
     private final GameMechanics gameMechanics;
     private final Player player;
     private final ArrayList<Stock> stocks;
+    private final ArrayList<Integer> date;
 
     public Controler() {
         this.stocks = new ArrayList<>();
         this.player = new Player(getUserNameInput());
         this.gameMechanics = new GameMechanics(stocks, player);
-
+        this.date = new ArrayList<>(Arrays.asList(13, 6, 2009));
 
         stocks.add(new Stock("Nvidia", 2));
         stocks.add(new Stock("AMD", 1));
@@ -26,7 +28,7 @@ public class Controler {
     }
 
     public void init() {
-        MainWindow m = new MainWindow(gameMechanics, stocks, player);
+        MainWindow m = new MainWindow(gameMechanics, stocks, player, date);
         m.init();
         m.firstStart();
     }
