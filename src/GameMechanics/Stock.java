@@ -14,7 +14,7 @@ public class Stock {
         this.numbers = new LinkedList<>();
 
         Random rnd = new Random();
-        numbers.add(rnd.nextInt(1000));
+        numbers.add(rnd.nextInt(500));
     }
 
     public LinkedList<Integer> getNumbers() {
