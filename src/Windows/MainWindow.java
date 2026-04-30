@@ -18,14 +18,18 @@ public class MainWindow extends MyWindow {
     private final ArrayList<Stock> stocks;
     private final Player player;
     private final ArrayList<JButton> disabledButtons;
+    private ArrayList<Integer> date;
+    private JLabel dateLabel;
 
-    public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks, Player player) {
+    public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks, Player player, ArrayList<Integer> date) {
         this.gameMechanics = gameMechanics;
         this.button2 = new JButton("Next Week");
         this.stockPanels = new ArrayList<>();
         this.stocks = stocks;
         this.player = player;
         this.disabledButtons = new ArrayList<>();
+        this.date = date;
+        this.dateLabel = new JLabel(date.get(0) + "." + date.get(1) + "." + date.get(2));
     }
 
     public void firstStart(){
@@ -43,7 +47,9 @@ public class MainWindow extends MyWindow {
 
         JPanel southPanel = new JPanel(new GridLayout(1, 5));
         southPanel.add(new JPanel());
-        southPanel.add(new JPanel());
+
+        dateLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        southPanel.add(dateLabel);
 
         CustomButton.changeGreen(button2);
         JPanel buttonPanel = new JPanel();
@@ -70,7 +76,7 @@ public class MainWindow extends MyWindow {
             int finalI = i;
             detailedView.addActionListener(e -> {
                 dispose();
-                new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers(), player, stocks.get(finalI).getName()).init(stocks);
+                new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers(), player, stocks.get(finalI).getName(), date).init(stocks);
             });
         }
         if (stocks.getFirst().getNumbers().size() > 1){
@@ -88,6 +94,7 @@ public class MainWindow extends MyWindow {
     @Override
     public void update() {
         gameMechanics.addNextNumber();
+        date = gameMechanics.updateDate(date);
         updateText();
     }
 
@@ -108,5 +115,6 @@ public class MainWindow extends MyWindow {
                 stockPanels.get(i).getLabelPrice().setText("Price: ↓" + priceNow);
             }
         }
+        dateLabel.setText(date.get(0) + "." + date.get(1) + "." + date.get(2));
     }
 }
