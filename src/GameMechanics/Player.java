@@ -28,7 +28,7 @@ public class Player {
         for (int i = moneyTemp.length() - 1; i > -1; i--) {
             moneyText += moneyTemp.charAt(i);
         }
-        return moneyText;
+        return moneyText + " €";
     }
 
     public int getMoney() {

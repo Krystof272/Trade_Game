@@ -62,9 +62,11 @@ public class MainWindow extends MyWindow {
         southPanel.setOpaque(false);
         southPanel.add(new JPanel() {{ setOpaque(false); }});
 
-        dateLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-        dateLabel.setOpaque(true);
-        southPanel.add(dateLabel);
+        JPanel datePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        dateLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        datePanel.setOpaque(false);
+        datePanel.add(dateLabel);
+        southPanel.add(datePanel);
 
         CustomButton.changeGreen(button2);
         JPanel buttonPanel = new JPanel();
@@ -74,9 +76,9 @@ public class MainWindow extends MyWindow {
         disabledButtons.add(button2);
 
         JLabel playerMoneyLabel = new JLabel("Money: " + player.getMoneyText());
-        playerMoneyLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
-        playerMoneyLabel.setBackground(Color.WHITE);
+        playerMoneyLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
         JPanel playerMoneyPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        playerMoneyPanel.setOpaque(false);
         playerMoneyPanel.add(playerMoneyLabel);
         southPanel.add(playerMoneyPanel);
 
@@ -86,7 +88,7 @@ public class MainWindow extends MyWindow {
         dashboardPanel.setOpaque(false);
         for (int i = 0; i < stocks.size(); i++) {
             JButton detailedView = new JButton("Detailed View");
-            stockPanels.add(new StockPanel(detailedView, new JLabel("Price: " + stocks.get(i).getNumbers().getLast()), new JLabel(stocks.get(i).getName() +"     ["+ player.getAmountOfStocksOwned(stocks.get(i).getName()) +"]")));
+            stockPanels.add(new StockPanel(detailedView, new JLabel("Price: " + stocks.get(i).getNumbers().getLast()) , new JLabel(stocks.get(i).getName() +"     ["+ player.getAmountOfStocksOwned(stocks.get(i).getName()) +"]")));
             stockPanels.get(i).init();
             dashboardPanel.add(stockPanels.get(i));
             disabledButtons.add(detailedView);
