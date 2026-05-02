@@ -1,10 +1,12 @@
 package Windows;
 
 import Others.CustomButton;
-import Others.MyWindow;
+import Run.MyWindow;
 import GameMechanics.GameMechanics;
 import GameMechanics.Player;
 import GameMechanics.Stock;
+import Windows.JPanels.PaintLine;
+import GameMechanics.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,18 +24,20 @@ public class TradeWindow extends MyWindow {
     private final JLabel stockPrice;
     private final ArrayList<JButton> disabledButtons;
     private ArrayList<Integer> date;
+    private Settings settings;
 
-    public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput, Player player, String shareName, ArrayList<Integer> date) {
+    public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput, Player player, String shareName, ArrayList<Integer> date, Settings settings) {
         this.paintLine = new PaintLine();
         this.gameMechanics = gameMechanics;
         this.yHistory = yHistoryInput;
         this.player = player;
         this.shareName = shareName;
-        this.playerMoney = new JLabel("Money: " + player.getMoney());
-        this.stocksOwned = new JLabel("Owned: " + player.getAmountOfStocksOwned(shareName));
-        this.stockPrice = new JLabel("" + yHistory.getLast());
+        this.playerMoney = new JLabel();
+        this.stocksOwned = new JLabel();
+        this.stockPrice = new JLabel();
         this.disabledButtons = new ArrayList<>();
         this.date = date;
+        this.settings = settings;
     }
 
     public void init(ArrayList<Stock> stocks) {
@@ -50,6 +54,7 @@ public class TradeWindow extends MyWindow {
         setVisible(true);
 
         paintLine.paint(yHistory, date, gameMechanics);
+        updateText();
     }
 
     @Override
@@ -61,37 +66,37 @@ public class TradeWindow extends MyWindow {
     }
 
     public void updateText() {
-        playerMoney.setText("Money: " + player.getMoneyText());
+        playerMoney.setText("Money: " + player.getMoneyText(settings.getCurrency()));
         stocksOwned.setText("Owned: " + player.getAmountOfStocksOwned(shareName));
-        stockPrice.setText("" + yHistory.getLast());
+        stockPrice.setText(yHistory.getLast() + " " + settings.getCurrency());
     }
 
     public void southComponentsInit() {
         JPanel southPanel = new JPanel();
 
         JButton buyMax = new JButton("Buy Max");
-        CustomButton.changeBlue35(buyMax);
+        CustomButton.changeLightGray35(buyMax);
         southPanel.add(buyMax);
 
         JButton buy5x = new JButton("Buy 5x");
-        CustomButton.changeBlue35(buy5x);
+        CustomButton.changeLightGray35(buy5x);
         southPanel.add(buy5x);
 
         JButton buyButton = new JButton("Buy");
-        CustomButton.changeBlue35(buyButton);
+        CustomButton.changeLightGray35(buyButton);
         southPanel.add(buyButton);
 
 
         JButton sellButton = new JButton("Sell");
-        CustomButton.changeBlue35(sellButton);
+        CustomButton.changeLightGray35(sellButton);
         southPanel.add(sellButton);
 
         JButton sell5x = new JButton("Sell 5x");
-        CustomButton.changeBlue35(sell5x);
+        CustomButton.changeLightGray35(sell5x);
         southPanel.add(sell5x);
 
         JButton sellMax = new JButton("Sell Max");
-        CustomButton.changeBlue35(sellMax);
+        CustomButton.changeLightGray35(sellMax);
         southPanel.add(sellMax);
 
         add(southPanel, BorderLayout.SOUTH);
@@ -124,8 +129,8 @@ public class TradeWindow extends MyWindow {
         });
 
         sell5x.addActionListener(e -> {
-           gameMechanics.sellStock(shareName, yHistory.getLast(), 5);
-           updateText();
+            gameMechanics.sellStock(shareName, yHistory.getLast(), 5);
+            updateText();
         });
 
         sellMax.addActionListener(e -> {
@@ -182,7 +187,7 @@ public class TradeWindow extends MyWindow {
 
         buttonBack.addActionListener(e -> {
             dispose();
-            new MainWindow(gameMechanics, stocks, player, date).init();
+            new MainWindow(gameMechanics, stocks, player, date, settings).init();
         });
     }
 }
