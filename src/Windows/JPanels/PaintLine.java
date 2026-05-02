@@ -1,4 +1,4 @@
-package Windows;
+package Windows.JPanels;
 
 import GameMechanics.GameMechanics;
 
