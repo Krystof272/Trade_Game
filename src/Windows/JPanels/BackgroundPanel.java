@@ -1,4 +1,4 @@
-package Others;
+package Windows.JPanels;
 
 import javax.swing.*;
 import java.awt.*;
