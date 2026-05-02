@@ -1,4 +1,4 @@
-package Windows;
+package Windows.JPanels;
 
 import Others.CustomButton;
 
@@ -25,10 +25,12 @@ public class StockPanel extends JPanel {
 
         labelPrice.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         labelName.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        labelName.setForeground(Color.WHITE);
 
+        setOpaque(true);
+        setBackground(new Color(83, 83, 83, 255));
 
-
-        CustomButton.changeBlue20(button);
+        CustomButton.changeDarkGrey20(button);
     }
 
     public JLabel getLabelPrice() {
