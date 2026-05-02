@@ -4,6 +4,7 @@ import GameMechanics.GameMechanics;
 import Windows.MainWindow;
 import GameMechanics.Player;
 import GameMechanics.Stock;
+import GameMechanics.Settings;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -14,12 +15,14 @@ public class Controler {
     private final Player player;
     private final ArrayList<Stock> stocks;
     private final ArrayList<Integer> date;
+    private final Settings settings;
 
     public Controler() {
         this.stocks = new ArrayList<>();
         this.player = new Player(getUserNameInput());
         this.gameMechanics = new GameMechanics(stocks, player);
         this.date = new ArrayList<>(Arrays.asList(13, 6, 2009));
+        this.settings = new Settings(new String[]{"desktop-win7.png", "tesla-cybertruck.png"}, new String[]{"€", "Kc", "$"});
 
         stocks.add(new Stock("Nvidia", 2));
         stocks.add(new Stock("AMD", 1));
@@ -34,7 +37,7 @@ public class Controler {
     }
 
     public void init() {
-        MainWindow m = new MainWindow(gameMechanics, stocks, player, date);
+        MainWindow m = new MainWindow(gameMechanics, stocks, player, date, settings);
         m.init();
         m.firstStart();
     }
