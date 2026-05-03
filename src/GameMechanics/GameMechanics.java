@@ -33,7 +33,7 @@ public class GameMechanics {
         Random rnd = new Random();
         int number;
         for (Stock stock : stocks) {
-            number = stock.getNumbers().getLast() + (rnd.nextInt(-100, 120) * stock.getFluctuation());
+            number = stock.getNumbers().getLast() + (rnd.nextInt(-100, 110) * stock.getFluctuation());
 
             if (number < 10) {
                 number = 10;
