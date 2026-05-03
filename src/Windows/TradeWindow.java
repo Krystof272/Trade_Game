@@ -119,12 +119,12 @@ public class TradeWindow extends MyWindow {
         });
 
         buyButton.addActionListener(e -> {
-            new BuyDialog(this, gameMechanics, player, shareName, yHistory.getLast());
+            new BuyDialog(this, gameMechanics, player, shareName, yHistory.getLast(), settings);
             updateText();
         });
 
         sellButton.addActionListener(e -> {
-            new SellDialog(this, gameMechanics, player, shareName, yHistory.getLast());
+            new SellDialog(this, gameMechanics, player, shareName, yHistory.getLast(), settings);
             updateText();
         });
 
