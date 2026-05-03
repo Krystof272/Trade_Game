@@ -2,13 +2,14 @@ package Windows;
 
 import GameMechanics.GameMechanics;
 import GameMechanics.Player;
+import GameMechanics.Settings;
 import Others.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class BuyDialog extends JDialog {
-    public BuyDialog(JFrame parent, GameMechanics gameMechanics, Player player, String shareName, int currentPrice) {
+    public BuyDialog(JFrame parent, GameMechanics gameMechanics, Player player, String shareName, int currentPrice, Settings settings) {
         super(parent, "Buy " + shareName, true);
 
         setLayout(new BorderLayout());
@@ -34,7 +35,7 @@ public class BuyDialog extends JDialog {
         JSpinner amountSpinner = new JSpinner(spinnerModel);
 
         JLabel priceTextLabel = new JLabel("Total Price:");
-        JLabel priceValueLabel = new JLabel("$" + (initialValue * currentPrice));
+        JLabel priceValueLabel = new JLabel(settings.getCurrency() + (initialValue * currentPrice));
         priceValueLabel.setFont(new Font("Times New Roman", Font.BOLD, 19));
         priceTextLabel.setFont(new Font("Times New Roman", Font.PLAIN, 19));
 

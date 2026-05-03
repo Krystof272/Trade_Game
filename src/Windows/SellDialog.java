@@ -3,12 +3,13 @@ package Windows;
 import GameMechanics.GameMechanics;
 import GameMechanics.Player;
 import Others.CustomButton;
+import GameMechanics.Settings;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SellDialog extends JDialog {
-    public SellDialog(JFrame parent, GameMechanics gameMechanics, Player player, String shareName, int currentPrice) {
+    public SellDialog(JFrame parent, GameMechanics gameMechanics, Player player, String shareName, int currentPrice, Settings settings) {
         super(parent, "Sell " + shareName, true);
 
         setLayout(new BorderLayout());
@@ -34,7 +35,7 @@ public class SellDialog extends JDialog {
         JSpinner amountSpinner = new JSpinner(spinnerModel);
 
         JLabel priceTextLabel = new JLabel("Money gained:");
-        JLabel priceValueLabel = new JLabel("$" + (initialValue * currentPrice));
+        JLabel priceValueLabel = new JLabel(settings.getCurrency() + (initialValue * currentPrice));
         priceValueLabel.setFont(new Font("Times New Roman", Font.BOLD, 19));
         priceTextLabel.setFont(new Font("Times New Roman", Font.PLAIN, 19));
 
