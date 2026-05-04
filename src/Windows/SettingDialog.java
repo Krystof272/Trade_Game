@@ -9,19 +9,22 @@ import java.awt.*;
 public class SettingDialog extends JDialog {
     public SettingDialog(Frame owner, Settings settings) {
         super(owner, true);
-        setSize(200, 130);
+        setSize(200, 160);
         setLocationRelativeTo(owner);
         setResizable(false);
         setTitle("Settings");
 
-        JPanel comboBoxPanel = new JPanel();
-        comboBoxPanel.setLayout(new GridLayout(2, 1));
+        JPanel comboBoxPanel = new JPanel(new GridLayout(3, 1));
 
         JComboBox<String> backgroundImageList = new JComboBox<>(settings.getBackgroundList());
         JComboBox<String> currencyList = new JComboBox<>(settings.getCurrencyList());
 
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(settings.getDelay(), 1, null, 1);
+        JSpinner amountSpinner = new JSpinner(spinnerModel);
+
         comboBoxPanel.add(backgroundImageList);
         comboBoxPanel.add(currencyList);
+        comboBoxPanel.add(amountSpinner);
 
         add(comboBoxPanel);
 
@@ -43,6 +46,7 @@ public class SettingDialog extends JDialog {
         save.addActionListener(e -> {
             settings.setImageBackgroundName((String) backgroundImageList.getSelectedItem());
             settings.setCurrency((String) currencyList.getSelectedItem());
+            settings.setDelay((int) amountSpinner.getValue());
             this.dispose();
         });
 
