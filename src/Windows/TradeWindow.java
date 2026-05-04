@@ -183,7 +183,7 @@ public class TradeWindow extends MyWindow {
         disabledButtons.add(buttonNextweek);
         disabledButtons.add(buttonBack);
 
-        buttonNextweek.addActionListener(e -> run(disabledButtons));
+        buttonNextweek.addActionListener(e -> run(disabledButtons, settings));
 
         buttonBack.addActionListener(e -> {
             dispose();
