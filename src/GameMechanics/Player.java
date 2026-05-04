@@ -13,8 +13,8 @@ public class Player {
         this.stocksOwned = new HashMap<>();
     }
 
-    public String getMoneyText(String currency) {
-        String moneyText = String.valueOf(money);
+    public String getMoneyText(int multiplication) {
+        String moneyText = String.valueOf(money / multiplication);
         String moneyTemp = "";
         int a = 1;
         for (int i = moneyText.length() - 1; i > -1; i--) {
@@ -28,7 +28,7 @@ public class Player {
         for (int i = moneyTemp.length() - 1; i > -1; i--) {
             moneyText += moneyTemp.charAt(i);
         }
-        return moneyText + " " + currency;
+        return moneyText;
     }
 
     public int getMoney() {
