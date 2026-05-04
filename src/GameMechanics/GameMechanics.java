@@ -35,8 +35,8 @@ public class GameMechanics {
         for (Stock stock : stocks) {
             number = stock.getNumbers().getLast() + (rnd.nextInt(-100, 110) * stock.getFluctuation());
 
-            if (number < 10) {
-                number = 10;
+            if (number < 25) {
+                number = 25;
             } else if (number > 5000) {
                 number = 5000;
             }
