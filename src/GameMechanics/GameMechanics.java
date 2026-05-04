@@ -37,6 +37,8 @@ public class GameMechanics {
 
             if (number < 10) {
                 number = 10;
+            } else if (number > 5000) {
+                number = 5000;
             }
             stock.getNumbers().add(number);
         }
