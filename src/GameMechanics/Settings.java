@@ -12,7 +12,7 @@ public class Settings {
         this.imageBackgroundName = backgroundList[0];
         this.currencyList = currencyList;
         this.currency = currencyList[0];
-        this.delay = 1000;
+        this.delay = 200;
     }
 
     public String getImageBackgroundName() {
@@ -26,6 +26,32 @@ public class Settings {
 
     public String getCurrency() {
         return currency;
+    }
+
+    public int getMultiplication() {
+        switch (currency) {
+            case "€":
+                return 25;
+            case "$":
+                return 20;
+            case "Kc":
+                return 1;
+            default:
+                return 0;
+        }
+    }
+
+    public String getCurrencyReal(int value) {
+        switch (currency) {
+            case "€":
+                return value / 25 + " €";
+            case "$":
+                return value / 20 + " $";
+            case "Kc":
+                return value + " Kc";
+            default:
+                return "Symbol not defined";
+        }
     }
 
     public void setCurrency(String currency) {
