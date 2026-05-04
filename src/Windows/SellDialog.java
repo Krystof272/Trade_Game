@@ -35,7 +35,7 @@ public class SellDialog extends JDialog {
         JSpinner amountSpinner = new JSpinner(spinnerModel);
 
         JLabel priceTextLabel = new JLabel("Money gained:");
-        JLabel priceValueLabel = new JLabel(settings.getCurrencyReal(initialValue * currentPrice));
+        JLabel priceValueLabel = new JLabel(settings.toStringPriceSymbol(initialValue * currentPrice));
         priceValueLabel.setFont(new Font("Times New Roman", Font.BOLD, 19));
         priceTextLabel.setFont(new Font("Times New Roman", Font.PLAIN, 19));
 
@@ -46,7 +46,7 @@ public class SellDialog extends JDialog {
 
         amountSpinner.addChangeListener(e -> {
             int amount = (int) amountSpinner.getValue();
-            priceValueLabel.setText(settings.getCurrencyReal(amount * currentPrice));
+            priceValueLabel.setText(settings.toStringPriceSymbol(amount * currentPrice));
         });
 
         JPanel bottomPanel = new JPanel(new FlowLayout());

@@ -78,9 +78,9 @@ public class TradeWindow extends MyWindow {
     }
 
     public void updateText() {
-        playerMoney.setText("Money: " + player.getMoneyText(settings.getMultiplication()) +" "+ settings.getCurrency());
+        playerMoney.setText("Money: " + settings.toStringPriceSymbol(player.getMoney()));
         stocksOwned.setText("Owned: " + player.getAmountOfStocksOwned(shareName));
-        stockPrice.setText(settings.getCurrencyReal(yHistory.getLast()));
+        stockPrice.setText(settings.toStringPriceSymbol(yHistory.getLast()));
     }
 
     public void southComponentsInit() {

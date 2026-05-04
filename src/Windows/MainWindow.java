@@ -104,7 +104,7 @@ public class MainWindow extends MyWindow {
         southPanel.add(buttonPanel);
         disabledButtons.add(button2);
 
-        JLabel playerMoneyLabel = new JLabel("Money: " + player.getMoneyText(settings.getMultiplication()) +" "+ settings.getCurrency());
+        JLabel playerMoneyLabel = new JLabel("Money: " + settings.toStringPriceSymbol(player.getMoney()));
         playerMoneyLabel.setFont(new Font("Times New Roman", Font.BOLD, 30));
         JPanel playerMoneyPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         playerMoneyPanel.setOpaque(false);
@@ -123,7 +123,7 @@ public class MainWindow extends MyWindow {
         dashboardPanel.setOpaque(false);
         for (int i = 0; i < stocks.size(); i++) {
             JButton detailedView = new JButton("Detailed View");
-            stockPanels.add(new StockPanel(detailedView, new JLabel("Price: " + settings.getCurrencyReal(stocks.get(i).getNumbers().getLast())), new JLabel(stocks.get(i).getName() + "  [" + player.getAmountOfStocksOwned(stocks.get(i).getName()) + "]")));
+            stockPanels.add(new StockPanel(detailedView, new JLabel("Price: " + settings.toStringPriceSymbol(stocks.get(i).getNumbers().getLast())), new JLabel(stocks.get(i).getName() + "  [" + player.getAmountOfStocksOwned(stocks.get(i).getName()) + "]")));
             stockPanels.get(i).init();
             dashboardPanel.add(stockPanels.get(i));
             disabledButtons.add(detailedView);
@@ -167,10 +167,10 @@ public class MainWindow extends MyWindow {
 
             if (priceNow < priceBefore) {
                 stockPanels.get(i).getLabelPrice().setForeground(Color.RED);
-                stockPanels.get(i).getLabelPrice().setText("Price: ↓" + settings.getCurrencyReal(priceNow));
+                stockPanels.get(i).getLabelPrice().setText("Price: ↓" + settings.toStringPriceSymbol(priceNow));
             } else {
                 stockPanels.get(i).getLabelPrice().setForeground(Color.GREEN);
-                stockPanels.get(i).getLabelPrice().setText("Price: ↑" + settings.getCurrencyReal(priceNow));
+                stockPanels.get(i).getLabelPrice().setText("Price: ↑" + settings.toStringPriceSymbol(priceNow));
             }
         }
         dateLabel.setText(date.get(0) + "." + date.get(1) + "." + date.get(2));
