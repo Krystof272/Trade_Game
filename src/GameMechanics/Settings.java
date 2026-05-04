@@ -5,12 +5,14 @@ public class Settings {
     private String imageBackgroundName;
     private final String[] currencyList;
     private String currency;
+    private int delay;
 
     public Settings(String[] backgroundList, String[] currencyList) {
         this.backgroundList = backgroundList;
         this.imageBackgroundName = backgroundList[0];
         this.currencyList = currencyList;
         this.currency = currencyList[0];
+        this.delay = 1;
     }
 
     public String getImageBackgroundName() {
@@ -49,5 +51,13 @@ public class Settings {
             }
         }
         pole[indexFirst] = temp;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 }
