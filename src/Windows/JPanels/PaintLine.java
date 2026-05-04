@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class PaintLine extends JPanel {
-    private LinkedList<Integer> yHistory;
+    private final LinkedList<Integer> yHistory;
     private ArrayList<Integer> date;
     private GameMechanics gameMechanics;
 
@@ -47,29 +47,29 @@ public class PaintLine extends JPanel {
             yHistory.set(last7xIndex, yHistory.get(last7xIndex) / 8);
         }
 
-        int y_Date = -5;
-        int y_Xaxis = y_Date - 40;
-        int y_GraphLineOfset = y_Xaxis - 10;
-        g2d.drawLine(0, y_Xaxis, getWidth(), y_Xaxis);
+        int yDate = -5;
+        int yXaxis = yDate - 40;
+        int yGraphLineOfset = yXaxis - 10;
+        g2d.drawLine(0, yXaxis, getWidth(), yXaxis);
 
         int xValueOffset = 80;
-        int x_before = xValueOffset;
-        int x_now;
-        int y_now;
-        int y_before;
+        int xBefore = xValueOffset;
+        int xNow;
+        int yNow;
+        int yBefore;
 
         g2d.setFont(new Font("Times New Roman", Font.PLAIN, 25));
         for (int i = 0; i < 7; i++) {
-            x_now = x_before + (getWidth() - xValueOffset) / 7;
-            y_now = yHistory.get(yHistory.size() - 7 + i);
-            y_before = yHistory.get(yHistory.size() - 8 + i);
+            xNow = xBefore + (getWidth() - xValueOffset) / 7;
+            yNow = yHistory.get(yHistory.size() - 7 + i);
+            yBefore = yHistory.get(yHistory.size() - 8 + i);
 
-            xAxis(g2d, x_now, y_Xaxis, y_Date);
-            graphLine(g2d, y_now, y_before, x_now, x_before, y_GraphLineOfset);
+            xAxis(g2d, xNow, yXaxis, yDate);
+            graphLine(g2d, yNow, yBefore, xNow, xBefore, yGraphLineOfset);
 
-            x_before = x_now;
+            xBefore = xNow;
         }
-        yAxis(g2d, y_GraphLineOfset, topOffset, xValueOffset);
+        yAxis(g2d, yGraphLineOfset, topOffset, xValueOffset);
     }
 
     public void graphLine(Graphics g2d, int y_now, int y_before, int x_now, int x_before, int y_GraphLineOfset) {
