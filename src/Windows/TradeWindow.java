@@ -26,7 +26,7 @@ public class TradeWindow extends MyWindow {
     private final JLabel stockPrice;
     private final ArrayList<JButton> disabledButtons;
     private ArrayList<Integer> date;
-    private Settings settings;
+    private final Settings settings;
 
     public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput, Player player, String shareName, ArrayList<Integer> date, Settings settings) {
         this.paintLine = new PaintLine();
@@ -81,6 +81,11 @@ public class TradeWindow extends MyWindow {
         playerMoney.setText("Money: " + settings.toStringPriceSymbol(player.getMoney()));
         stocksOwned.setText("Owned: " + player.getAmountOfStocksOwned(shareName));
         stockPrice.setText(settings.toStringPriceSymbol(yHistory.getLast()));
+
+        if (player.getMoney() < 0) {
+            new EndGame(this, date);
+            dispose();
+        }
     }
 
     public void southComponentsInit() {
