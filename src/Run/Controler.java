@@ -21,8 +21,8 @@ public class Controler {
         this.stocks = new ArrayList<>();
         this.player = new Player(getUserNameInput());
         this.gameMechanics = new GameMechanics(stocks, player);
-        this.date = new ArrayList<>(Arrays.asList(13, 6, 2009));
-        this.settings = new Settings(new String[]{"desktop-win7.png", "tesla-cybertruck.png"}, new String[]{"€", "Kc", "$"});
+        this.date = new ArrayList<>(Arrays.asList(1, 11, 2030));
+        this.settings = new Settings(new String[]{"desktop-win7.png", "tesla-cybertruck.png"}, new String[]{"Kc", "€", "$"});
 
         stocks.add(new Stock("Nvidia", 2));
         stocks.add(new Stock("AMD", 1));
