@@ -15,13 +15,16 @@ public class Controler {
     private final Player player;
     private final ArrayList<Stock> stocks;
     private final ArrayList<Integer> date;
+    private static ArrayList<Integer> dateStart;
     private final Settings settings;
 
     public Controler() {
         this.stocks = new ArrayList<>();
         this.player = new Player(getUserNameInput());
         this.gameMechanics = new GameMechanics(stocks, player);
-        this.date = new ArrayList<>(Arrays.asList(1, 11, 2030));
+        dateStart = new ArrayList<>(Arrays.asList(1, 11, 2030));
+        this.date = new ArrayList<>();
+        this.date.addAll(dateStart);
         this.settings = new Settings(new String[]{"desktop-win7.png", "tesla-cybertruck.png"}, new String[]{"Kc", "€", "$"});
 
         stocks.add(new Stock("Nvidia", 2));
@@ -48,5 +51,9 @@ public class Controler {
             name = JOptionPane.showInputDialog(null, "Please enter your name:", "Name input", JOptionPane.QUESTION_MESSAGE);
         }
         return name;
+    }
+
+    public static ArrayList<Integer> getDateStart() {
+        return dateStart;
     }
 }
