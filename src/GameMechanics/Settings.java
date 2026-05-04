@@ -12,7 +12,7 @@ public class Settings {
         this.imageBackgroundName = backgroundList[0];
         this.currencyList = currencyList;
         this.currency = currencyList[0];
-        this.delay = 1;
+        this.delay = 1000;
     }
 
     public String getImageBackgroundName() {
