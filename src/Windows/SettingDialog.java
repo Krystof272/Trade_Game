@@ -9,12 +9,12 @@ import java.awt.*;
 public class SettingDialog extends JDialog {
     public SettingDialog(Frame owner, Settings settings) {
         super(owner, true);
-        setSize(200, 160);
+        setSize(300, 160);
         setLocationRelativeTo(owner);
         setResizable(false);
         setTitle("Settings");
 
-        JPanel comboBoxPanel = new JPanel(new GridLayout(3, 1));
+        JPanel settingPanel = new JPanel(new GridLayout(3, 2));
 
         JComboBox<String> backgroundImageList = new JComboBox<>(settings.getBackgroundList());
         JComboBox<String> currencyList = new JComboBox<>(settings.getCurrencyList());
@@ -22,11 +22,21 @@ public class SettingDialog extends JDialog {
         SpinnerNumberModel spinnerModel = new SpinnerNumberModel(settings.getDelay(), 1, null, 1);
         JSpinner amountSpinner = new JSpinner(spinnerModel);
 
-        comboBoxPanel.add(backgroundImageList);
-        comboBoxPanel.add(currencyList);
-        comboBoxPanel.add(amountSpinner);
+        JLabel backgroundLabel = new JLabel("Background Image:");
+        JLabel currencyLabel = new JLabel("Currency:");
+        JLabel delayLabel = new JLabel("Day speed (ms):");
+        delayLabel.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        currencyLabel.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        backgroundLabel.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 
-        add(comboBoxPanel);
+        settingPanel.add(backgroundLabel);
+        settingPanel.add(backgroundImageList);
+        settingPanel.add(currencyLabel);
+        settingPanel.add(currencyList);
+        settingPanel.add(delayLabel);
+        settingPanel.add(amountSpinner);
+
+        add(settingPanel);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
