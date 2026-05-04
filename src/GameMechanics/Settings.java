@@ -24,34 +24,32 @@ public class Settings {
         setFirst(imageBackgroundName, backgroundList);
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public int getMultiplication() {
+    public String toStringPriceSymbol(int price) {
+        int multiplication = 1;
         switch (currency) {
             case "€":
-                return 25;
+                multiplication = 25;
+                break;
             case "$":
-                return 20;
-            case "Kc":
-                return 1;
-            default:
-                return 0;
+                multiplication = 20;
+                break;
         }
-    }
 
-    public String getCurrencyReal(int value) {
-        switch (currency) {
-            case "€":
-                return value / 25 + " €";
-            case "$":
-                return value / 20 + " $";
-            case "Kc":
-                return value + " Kc";
-            default:
-                return "Symbol not defined";
+        String moneyText = String.valueOf(price / multiplication);
+        String moneyTemp = "";
+        int a = 1;
+        for (int i = moneyText.length() - 1; i > -1; i--) {
+            moneyTemp += moneyText.charAt(i);
+            if (a % 3 == 0) {
+                moneyTemp += " ";
+            }
+            a++;
         }
+        moneyText = "";
+        for (int i = moneyTemp.length() - 1; i > -1; i--) {
+            moneyText += moneyTemp.charAt(i);
+        }
+        return moneyText +" "+ currency;
     }
 
     public void setCurrency(String currency) {
