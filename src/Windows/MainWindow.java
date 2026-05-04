@@ -3,17 +3,16 @@ package Windows;
 import GameMechanics.GameMechanics;
 import Others.CustomButton;
 import Run.MyWindow;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 import GameMechanics.Player;
 import GameMechanics.Stock;
 import Windows.JPanels.BackgroundPanel;
 import Windows.JPanels.StockPanel;
 import GameMechanics.Settings;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -44,7 +43,7 @@ public class MainWindow extends MyWindow {
     public void firstStart() {
         button2.setEnabled(false);
         CustomButton.changeRed(button2);
-        run(disabledButtons);
+        run(disabledButtons, settings);
     }
 
     public void init() {
@@ -131,7 +130,7 @@ public class MainWindow extends MyWindow {
             new MainWindow(gameMechanics, stocks, player, date, settings).init();
             dispose();
         });
-        button2.addActionListener(e -> run(disabledButtons));
+        button2.addActionListener(e -> run(disabledButtons, settings));
 
         setVisible(true);
     }
