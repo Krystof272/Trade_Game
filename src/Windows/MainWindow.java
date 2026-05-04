@@ -62,6 +62,29 @@ public class MainWindow extends MyWindow {
         backgroundPanel.setLayout(new BorderLayout());
         setContentPane(backgroundPanel);
 
+        southPanel(backgroundPanel);
+        dashboardPanel(backgroundPanel);
+
+        JPanel settingsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        settingsPanel.setOpaque(false);
+
+        JButton settingsButton = new JButton("Settings");
+        CustomButton.changeDarkGrey20(settingsButton);
+        settingsPanel.add(settingsButton);
+        backgroundPanel.add(settingsPanel, BorderLayout.NORTH);
+        disabledButtons.add(settingsButton);
+
+        settingsButton.addActionListener(e -> {
+            new SettingDialog(this, settings);
+            new MainWindow(gameMechanics, stocks, player, date, settings).init();
+            dispose();
+        });
+        button2.addActionListener(e -> run(disabledButtons, settings));
+
+        setVisible(true);
+    }
+
+    public void southPanel(BackgroundPanel backgroundPanel) {
         JPanel southPanel = new JPanel(new GridLayout(1, 5));
         southPanel.setOpaque(false);
         southPanel.add(new JPanel() {{
@@ -92,6 +115,10 @@ public class MainWindow extends MyWindow {
             setOpaque(false);
         }});
 
+        backgroundPanel.add(southPanel, BorderLayout.SOUTH);
+    }
+
+    public void dashboardPanel(BackgroundPanel backgroundPanel) {
         JPanel dashboardPanel = new JPanel(new GridLayout(2, stocks.size() / 2));
         dashboardPanel.setOpaque(false);
         for (int i = 0; i < stocks.size(); i++) {
@@ -113,26 +140,8 @@ public class MainWindow extends MyWindow {
         JPanel stockPanel = new JPanel();
         stockPanel.setOpaque(false);
         stockPanel.add(dashboardPanel);
-        backgroundPanel.add(southPanel, BorderLayout.SOUTH);
+
         backgroundPanel.add(stockPanel, BorderLayout.CENTER);
-
-        JPanel settingsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        settingsPanel.setOpaque(false);
-
-        JButton settingsButton = new JButton("Settings");
-        CustomButton.changeDarkGrey20(settingsButton);
-        settingsPanel.add(settingsButton);
-        backgroundPanel.add(settingsPanel, BorderLayout.NORTH);
-        disabledButtons.add(settingsButton);
-
-        settingsButton.addActionListener(e -> {
-            new SettingDialog(this, settings);
-            new MainWindow(gameMechanics, stocks, player, date, settings).init();
-            dispose();
-        });
-        button2.addActionListener(e -> run(disabledButtons, settings));
-
-        setVisible(true);
     }
 
     @Override
