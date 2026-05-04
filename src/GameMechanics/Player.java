@@ -9,7 +9,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.money = Integer.MAX_VALUE;
+        this.money = 2100000000;
         this.stocksOwned = new HashMap<>();
     }
 
