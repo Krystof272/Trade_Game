@@ -134,14 +134,13 @@ public class MainWindow extends MyWindow {
                 new TradeWindow(gameMechanics, stocks.get(finalI).getNumbers(), player, stocks.get(finalI).getName(), date, settings).init(stocks);
             });
         }
-        if (stocks.getFirst().getNumbers().size() > 1) {
-            updateText();
-        }
         JPanel stockPanel = new JPanel();
         stockPanel.setOpaque(false);
         stockPanel.add(dashboardPanel);
 
         backgroundPanel.add(stockPanel, BorderLayout.CENTER);
+
+        updateText();
     }
 
     @Override
@@ -154,18 +153,24 @@ public class MainWindow extends MyWindow {
     public void updateText() {
         int priceNow;
         int priceBefore;
+        int indexBefore;
         LinkedList<Integer> yHistory;
         for (int i = 0; i < stockPanels.size(); i++) {
             yHistory = stocks.get(i).getNumbers();
-            priceNow = yHistory.getLast();
-            priceBefore = yHistory.get(yHistory.size() - 2);
+            indexBefore = yHistory.size() - 8;
+            if (indexBefore < 0){
+                indexBefore = 0;
+            }
 
-            if (priceNow > priceBefore) {
-                stockPanels.get(i).getLabelPrice().setForeground(Color.GREEN);
-                stockPanels.get(i).getLabelPrice().setText("Price: ↑" + priceNow + " " + settings.getCurrency());
-            } else {
+            priceNow = yHistory.getLast();
+            priceBefore = yHistory.get(indexBefore);
+
+            if (priceNow < priceBefore) {
                 stockPanels.get(i).getLabelPrice().setForeground(Color.RED);
                 stockPanels.get(i).getLabelPrice().setText("Price: ↓" + priceNow + " " + settings.getCurrency());
+            } else {
+                stockPanels.get(i).getLabelPrice().setForeground(Color.GREEN);
+                stockPanels.get(i).getLabelPrice().setText("Price: ↑" + priceNow + " " + settings.getCurrency());
             }
         }
         dateLabel.setText(date.get(0) + "." + date.get(1) + "." + date.get(2));
