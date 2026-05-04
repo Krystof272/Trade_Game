@@ -9,26 +9,8 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.money = 500;
+        this.money = Integer.MAX_VALUE;
         this.stocksOwned = new HashMap<>();
-    }
-
-    public String getMoneyText(int multiplication) {
-        String moneyText = String.valueOf(money / multiplication);
-        String moneyTemp = "";
-        int a = 1;
-        for (int i = moneyText.length() - 1; i > -1; i--) {
-            moneyTemp += moneyText.charAt(i);
-            if (a % 3 == 0) {
-                moneyTemp += " ";
-            }
-            a++;
-        }
-        moneyText = "";
-        for (int i = moneyTemp.length() - 1; i > -1; i--) {
-            moneyText += moneyTemp.charAt(i);
-        }
-        return moneyText;
     }
 
     public int getMoney() {
