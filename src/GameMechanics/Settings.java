@@ -24,6 +24,10 @@ public class Settings {
         setFirst(imageBackgroundName, backgroundList);
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
     public String toStringPriceSymbol(int price) {
         int multiplication = 1;
         switch (currency) {
@@ -49,7 +53,7 @@ public class Settings {
         for (int i = moneyTemp.length() - 1; i > -1; i--) {
             moneyText += moneyTemp.charAt(i);
         }
-        return moneyText +" "+ currency;
+        return moneyText + " " + currency;
     }
 
     public void setCurrency(String currency) {
