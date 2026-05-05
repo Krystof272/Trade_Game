@@ -9,7 +9,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.money = 2100000000;
+        this.money = 500;
         this.stocksOwned = new HashMap<>();
     }
 
@@ -19,6 +19,10 @@ public class Player {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void addStock(String stockName, int amount) {
