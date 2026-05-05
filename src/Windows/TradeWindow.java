@@ -29,7 +29,7 @@ public class TradeWindow extends MyWindow {
     private final Settings settings;
 
     public TradeWindow(GameMechanics gameMechanics, LinkedList<Integer> yHistoryInput, Player player, String shareName, ArrayList<Integer> date, Settings settings) {
-        this.paintLine = new PaintLine();
+        this.paintLine = new PaintLine(gameMechanics, settings, date);
         this.gameMechanics = gameMechanics;
         this.yHistory = yHistoryInput;
         this.player = player;
@@ -65,7 +65,7 @@ public class TradeWindow extends MyWindow {
 
         setVisible(true);
 
-        paintLine.paint(yHistory, date, gameMechanics);
+        paintLine.paint(yHistory);
         updateText();
     }
 
@@ -73,7 +73,7 @@ public class TradeWindow extends MyWindow {
     public void update() {
         gameMechanics.addNextNumber();
         date = gameMechanics.updateDate(date);
-        paintLine.paint(yHistory, date, gameMechanics);
+        paintLine.paint(yHistory);
         updateText();
     }
 
@@ -83,7 +83,7 @@ public class TradeWindow extends MyWindow {
         stockPrice.setText(settings.toStringPriceSymbol(yHistory.getLast()));
 
         if (player.getMoney() < 0) {
-            new EndGame(this, date);
+            new EndGame(this, date, player);
             dispose();
         }
     }
