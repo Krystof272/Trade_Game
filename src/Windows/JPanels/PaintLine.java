@@ -1,6 +1,7 @@
 package Windows.JPanels;
 
 import GameMechanics.GameMechanics;
+import GameMechanics.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,16 +12,18 @@ public class PaintLine extends JPanel {
     private final LinkedList<Integer> yHistory;
     private ArrayList<Integer> date;
     private GameMechanics gameMechanics;
+    private Settings settings;
 
-    public PaintLine() {
+    public PaintLine(GameMechanics gameMechanics, Settings settings, ArrayList<Integer> dateInput) {
         this.yHistory = new LinkedList<>();
         this.date = new ArrayList<>();
+        this.gameMechanics = gameMechanics;
+        this.settings = settings;
+        this.date = dateInput;
     }
 
-    public void paint(LinkedList<Integer> yHistoryInput, ArrayList<Integer> dateInput, GameMechanics gameMechanics) {
+    public void paint(LinkedList<Integer> yHistoryInput) {
         this.yHistory.addAll(yHistoryInput);
-        date = dateInput;
-        this.gameMechanics = gameMechanics;
         this.repaint();
     }
 
@@ -52,7 +55,10 @@ public class PaintLine extends JPanel {
         int yGraphLineOfset = yXaxis - 10;
         g2d.drawLine(0, yXaxis, getWidth(), yXaxis);
 
-        int xValueOffset = 80;
+        int xValueOffset = 120;
+        if (settings.getCurrency().equals("$") || settings.getCurrency().equals("€")){
+            xValueOffset = 90;
+        }
         int xBefore = xValueOffset;
         int xNow;
         int yNow;
@@ -98,7 +104,7 @@ public class PaintLine extends JPanel {
 
         g2d.drawLine(xValue, 0, xValue, -getHeight());
         for (int i = 0; i < amount; i++) {
-            g2d.drawString(String.valueOf((1250 * (i + 1))), 5, y_now + 7);
+            g2d.drawString(settings.toStringPriceSymbol((1250 * (i + 1))), 5, y_now + 7);
             g2d.drawLine(xValue - 10, y_now, xValue + 10, y_now);
             y_now += yOffset;
         }
