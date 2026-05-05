@@ -30,19 +30,7 @@ public class EndGame extends JDialog {
             date.set(2, date.get(2) - 1);
         }
 
-        JPanel gridPanel = new JPanel(new GridLayout(3, 1));
-        JLabel congratulations = new JLabel("Congratulations, " + player.getName() + " won the game!");
-        JLabel timeLabel = new JLabel("It took you " + date.getFirst() + " days, " + date.get(1) + " months, " + date.getLast() + " years");
-        JLabel timeLabelNext = new JLabel("to overflow the integer");
-
-        congratulations.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        timeLabel.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        timeLabelNext.setFont(new Font("Times New Roman", Font.BOLD, 18));
-
-
-        gridPanel.add(congratulations);
-        gridPanel.add(timeLabel);
-        gridPanel.add(timeLabelNext);
+        JPanel gridPanel = getJPanel(date, player);
 
         add(gridPanel);
 
@@ -58,5 +46,25 @@ public class EndGame extends JDialog {
         });
 
         setVisible(true);
+    }
+
+    private static JPanel getJPanel(ArrayList<Integer> date, Player player) {
+        JPanel gridPanel = new JPanel(new GridLayout(4, 1));
+        JLabel congratulations = new JLabel("Congratulations, " + player.getName());
+        JLabel congratulationsNext = new JLabel("you won the game!");
+        JLabel timeLabel = new JLabel("It took you " + date.getFirst() + " days, " + date.get(1) + " months, " + date.getLast() + " years");
+        JLabel timeLabelNext = new JLabel("to overflow the integer");
+
+        congratulations.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        congratulationsNext.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        timeLabel.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        timeLabelNext.setFont(new Font("Times New Roman", Font.BOLD, 18));
+
+
+        gridPanel.add(congratulations);
+        gridPanel.add(congratulationsNext);
+        gridPanel.add(timeLabel);
+        gridPanel.add(timeLabelNext);
+        return gridPanel;
     }
 }
