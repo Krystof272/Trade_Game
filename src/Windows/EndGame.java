@@ -1,5 +1,6 @@
 package Windows;
 
+import GameMechanics.Player;
 import Others.CustomButton;
 import Run.Controler;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class EndGame extends JDialog {
-    public EndGame(Frame owner, ArrayList<Integer> date) {
+    public EndGame(Frame owner, ArrayList<Integer> date, Player player) {
         super(owner, true);
         setSize(400, 200);
         setLocationRelativeTo(owner);
@@ -19,7 +20,7 @@ public class EndGame extends JDialog {
             System.out.println(Controler.getDateStart().get(i));
             date.set(i, date.get(i) - Controler.getDateStart().get(i));
         }
-        //1, 11, 2030
+
         if (date.getFirst() < 0) {
             date.set(0, 30 + date.getFirst());
             date.set(1, date.get(1) - 1);
@@ -30,8 +31,8 @@ public class EndGame extends JDialog {
         }
 
         JPanel gridPanel = new JPanel(new GridLayout(3, 1));
-        JLabel congratulations = new JLabel("Congratulations, you won the game!");
-        JLabel timeLabel = new JLabel("It took you " + date.getFirst() + " days, " + date.get(1) + " months, " + date.getLast() +" years");
+        JLabel congratulations = new JLabel("Congratulations, " + player.getName() + " won the game!");
+        JLabel timeLabel = new JLabel("It took you " + date.getFirst() + " days, " + date.get(1) + " months, " + date.getLast() + " years");
         JLabel timeLabelNext = new JLabel("to overflow the integer");
 
         congratulations.setFont(new Font("Times New Roman", Font.BOLD, 20));
