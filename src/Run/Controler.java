@@ -25,7 +25,7 @@ public class Controler {
         dateStart = new ArrayList<>(Arrays.asList(1, 11, 2030));
         this.date = new ArrayList<>();
         this.date.addAll(dateStart);
-        this.settings = new Settings(new String[]{"desktop-win7.png", "tesla-cybertruck.png"}, new String[]{"Kc", "€", "$"});
+        this.settings = new Settings(new String[]{"desktop-win7.png", "tesla-cybertruck.png", "foto_navod.png"}, new String[]{"Kc", "€", "$"});
 
         stocks.add(new Stock("Nvidia", 2));
         stocks.add(new Stock("AMD", 1));
