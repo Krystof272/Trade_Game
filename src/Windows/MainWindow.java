@@ -123,7 +123,7 @@ public class MainWindow extends MyWindow {
         dashboardPanel.setOpaque(false);
         for (int i = 0; i < stocks.size(); i++) {
             JButton detailedView = new JButton("Detailed View");
-            stockPanels.add(new StockPanel(detailedView, new JLabel("Price: " + settings.toStringPriceSymbol(stocks.get(i).getNumbers().getLast())), new JLabel(stocks.get(i).getName() + "  [" + player.getAmountOfStocksOwned(stocks.get(i).getName()) + "]")));
+            stockPanels.add(new StockPanel(detailedView, new JLabel("Price: " + settings.toStringPriceSymbol(stocks.get(i).getNumbers().getLast())), new JLabel(stocks.get(i).getName() + "  [" + player.getAmountOfStocksOwned(stocks.get(i).getName()) + "]  ")));
             stockPanels.get(i).init();
             dashboardPanel.add(stockPanels.get(i));
             disabledButtons.add(detailedView);

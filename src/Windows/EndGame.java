@@ -17,7 +17,6 @@ public class EndGame extends JDialog {
         setTitle("WIN");
 
         for (int i = 0; i < date.size(); i++) {
-            System.out.println(Controler.getDateStart().get(i));
             date.set(i, date.get(i) - Controler.getDateStart().get(i));
         }
 
