@@ -1,0 +1,69 @@
+{
+  "stocks": [
+    {
+      "name": "Nvidia",
+      "fluctuation": 2,
+      "numbers": [200]
+    },
+    {
+      "name": "AMD",
+      "fluctuation": 1,
+      "numbers": [100]
+    },
+    {
+      "name": "Intel",
+      "fluctuation": 3,
+      "numbers": [400]
+    },
+    {
+      "name": "Vitkovium",
+      "fluctuation": 5,
+      "numbers": [10]
+    },
+    {
+      "name": "Apple",
+      "fluctuation": 1,
+      "numbers": [800]
+    },
+    {
+      "name": "Samsung",
+      "fluctuation": 3,
+      "numbers": [250]
+    },
+    {
+      "name": "Qualcomm",
+      "fluctuation": 2,
+      "numbers": [500]
+    },
+    {
+      "name": "Prusa",
+      "fluctuation": 1,
+      "numbers": [130]
+    },
+    {
+      "name": "Bambu Lab",
+      "fluctuation": 4,
+      "numbers": [600]
+    },
+    {
+      "name": "Microslop",
+      "fluctuation": 2,
+      "numbers": [350]
+    }
+  ],
+  "backgroundList": [
+    "desktop-win7.png",
+    "tesla-cybertruck.png",
+    "foto_navod.png"
+  ],
+  "currencyList": [
+    "Kc",
+    "€",
+    "$"
+  ],
+  "date": [
+    1,
+    11,
+    2030
+  ]
+}
