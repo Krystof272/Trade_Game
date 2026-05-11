@@ -1,46 +1,32 @@
 package Run;
 
 import GameMechanics.GameMechanics;
+import Others.GameData;
 import Windows.MainWindow;
 import GameMechanics.Player;
-import GameMechanics.Stock;
 import GameMechanics.Settings;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Controler {
     private final GameMechanics gameMechanics;
     private final Player player;
-    private final ArrayList<Stock> stocks;
-    private final ArrayList<Integer> date;
     private static ArrayList<Integer> dateStart;
     private final Settings settings;
+    private final GameData gameData;
 
     public Controler() {
-        this.stocks = new ArrayList<>();
+        this.gameData = GameData.loadGameDataFromResources("/gameData.json");
         this.player = new Player(getUserNameInput());
-        this.gameMechanics = new GameMechanics(stocks, player);
-        dateStart = new ArrayList<>(Arrays.asList(1, 11, 2030));
-        this.date = new ArrayList<>();
-        this.date.addAll(dateStart);
-        this.settings = new Settings(new String[]{"desktop-win7.png", "tesla-cybertruck.png", "foto_navod.png"}, new String[]{"Kc", "€", "$"});
-
-        stocks.add(new Stock("Nvidia", 2));
-        stocks.add(new Stock("AMD", 1));
-        stocks.add(new Stock("Intel", 3));
-        stocks.add(new Stock("Vitkovium", 5));
-        stocks.add(new Stock("Apple", 1));
-        stocks.add(new Stock("Samsung", 3));
-        stocks.add(new Stock("Qualcomm", 2));
-        stocks.add(new Stock("Prusa", 1));
-        stocks.add(new Stock("Bambu Lab", 4));
-        stocks.add(new Stock("Microslop", 2));
+        this.gameMechanics = new GameMechanics(gameData.getStocks(), player);
+        dateStart = new ArrayList<>();
+        dateStart.addAll(gameData.getDate());
+        this.settings = new Settings(gameData.getBackgroundList(), gameData.getCurrencyList());
     }
 
     public void init() {
-        MainWindow m = new MainWindow(gameMechanics, stocks, player, date, settings);
+        MainWindow m = new MainWindow(gameMechanics, gameData.getStocks(), player, gameData.getDate(), settings);
         m.init();
         m.firstStart();
     }
