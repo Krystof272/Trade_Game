@@ -16,11 +16,15 @@ public abstract class MyWindow extends JFrame {
         CustomButton.changeGreen(buttons.getFirst());
     }
 
-    public void run(ArrayList<JButton> buttons, Settings settings) {
+    public void toDoStart(ArrayList<JButton> buttons) {
         for (JButton button : buttons) {
             button.setEnabled(false);
         }
         CustomButton.changeRed(buttons.getFirst());
+    }
+
+    public void run(ArrayList<JButton> buttons, Settings settings) {
+        toDoStart(buttons);
 
         int[] count = {0};
         Timer timer = new Timer(settings.getDelay(), e -> {
