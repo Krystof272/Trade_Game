@@ -50,7 +50,14 @@ public class Settings {
             a++;
         }
         moneyText = "";
-        for (int i = moneyTemp.length() - 1; i > -1; i--) {
+        int moneyTempLength = moneyTemp.length();
+        if (moneyTempLength > 8) {
+            for (int i = moneyTempLength - 1; i > 7; i--) {
+                moneyText += moneyTemp.charAt(i);
+            }
+            return moneyText + "M " + currency;
+        }
+        for (int i = moneyTempLength - 1; i > -1; i--) {
             moneyText += moneyTemp.charAt(i);
         }
         return moneyText + " " + currency;
