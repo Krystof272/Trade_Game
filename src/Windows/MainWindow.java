@@ -25,8 +25,8 @@ public class MainWindow extends MyWindow {
     private final Player player;
     private final ArrayList<JButton> disabledButtons;
     private ArrayList<Integer> date;
-    private JLabel dateLabel;
-    private Settings settings;
+    private final JLabel dateLabel;
+    private final Settings settings;
 
     public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks, Player player, ArrayList<Integer> date, Settings settings) {
         this.gameMechanics = gameMechanics;
@@ -41,8 +41,6 @@ public class MainWindow extends MyWindow {
     }
 
     public void firstStart() {
-        button2.setEnabled(false);
-        CustomButton.changeRed(button2);
         run(disabledButtons, settings);
     }
 
