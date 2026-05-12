@@ -3,15 +3,19 @@ package Windows;
 import GameMechanics.Player;
 import Others.CustomButton;
 import Run.Controler;
+import Windows.JPanels.W;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class EndGame extends JDialog {
+    private W w;
+    private Thread thread;
+
     public EndGame(Frame owner, ArrayList<Integer> date, Player player) {
         super(owner, true);
-        setSize(400, 200);
+        setSize(600, 400);
         setLocationRelativeTo(owner);
         setResizable(false);
         setTitle("WIN");
@@ -25,13 +29,17 @@ public class EndGame extends JDialog {
             date.set(1, date.get(1) - 1);
         }
         if (date.get(1) < 0) {
-            date.set(1, 12);
+            date.set(1, 11);
             date.set(2, date.get(2) - 1);
         }
 
         JPanel gridPanel = getJPanel(date, player);
+        JPanel textPanel = new JPanel(new FlowLayout());
+        textPanel.add(gridPanel);
+        add(textPanel, BorderLayout.NORTH);
 
-        add(gridPanel);
+        w = new W();
+        add(w, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
         JButton okButton = new JButton("Ok");
@@ -41,29 +49,40 @@ public class EndGame extends JDialog {
         add(buttonPanel, BorderLayout.SOUTH);
 
         okButton.addActionListener(e -> {
+            thread = null;
             dispose();
         });
 
         setVisible(true);
+
+        thread = new Thread(this::run);
+        thread.start();
     }
 
     private static JPanel getJPanel(ArrayList<Integer> date, Player player) {
-        JPanel gridPanel = new JPanel(new GridLayout(4, 1));
-        JLabel congratulations = new JLabel("Congratulations, " + player.getName());
-        JLabel congratulationsNext = new JLabel("you won the game!");
-        JLabel timeLabel = new JLabel("It took you " + date.getFirst() + " days, " + date.get(1) + " months, " + date.getLast() + " years");
-        JLabel timeLabelNext = new JLabel("to overflow the integer");
+        JPanel gridPanel = new JPanel(new GridLayout(2, 1));
+        JLabel congratulations = new JLabel("You won!!!    " + player.getName());
+        JLabel timeLabel = new JLabel("It took you " + date.getFirst() + " days, " + date.get(1) + " months and " + date.getLast() + " years to overflow the integer!!!");
 
-        congratulations.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        congratulationsNext.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        timeLabel.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        timeLabelNext.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        congratulations.setFont(new Font("Times New Roman", Font.BOLD, 35));
+        timeLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
+        JPanel congratulationsPanel = new JPanel(new FlowLayout());
+        congratulationsPanel.add(congratulations);
 
-        gridPanel.add(congratulations);
-        gridPanel.add(congratulationsNext);
+        gridPanel.add(congratulationsPanel);
         gridPanel.add(timeLabel);
-        gridPanel.add(timeLabelNext);
         return gridPanel;
+    }
+
+    public void run() {
+        while (thread != null) {
+            w.paint();
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
