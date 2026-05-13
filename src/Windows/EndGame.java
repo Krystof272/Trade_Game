@@ -8,6 +8,7 @@ import Windows.JPanels.W;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class EndGame extends JDialog {
     private W w;
@@ -53,10 +54,10 @@ public class EndGame extends JDialog {
             dispose();
         });
 
-        setVisible(true);
-
         thread = new Thread(this::run);
         thread.start();
+
+        setVisible(true);
     }
 
     private static JPanel getJPanel(ArrayList<Integer> date, Player player) {
@@ -79,9 +80,10 @@ public class EndGame extends JDialog {
         while (thread != null) {
             w.paint();
             try {
-                Thread.sleep(10);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
+                break;
             }
         }
     }
