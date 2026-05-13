@@ -68,7 +68,7 @@ public class TradeWindow extends MyWindow {
         paintLine.paint(yHistory);
         updateText();
 
-        new EndGame(this, date, player);
+//        new EndGame(this, date, player);
     }
 
     @Override
