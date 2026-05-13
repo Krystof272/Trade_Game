@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import java.io.File;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 public class MainWindow extends MyWindow {
@@ -51,7 +52,12 @@ public class MainWindow extends MyWindow {
 
         Image backgroundImage = null;
         try {
-            backgroundImage = ImageIO.read(new File("resources/" + settings.getImageBackgroundName()));
+            InputStream is = getClass().getResourceAsStream("/" + settings.getImageBackgroundName());
+            if (is != null) {
+                backgroundImage = ImageIO.read(is);
+            } else {
+                backgroundImage = ImageIO.read(new File("resources/" + settings.getImageBackgroundName()));
+            }
         } catch (Exception e) {
             System.err.println("Could not load background image: " + e.getMessage());
             e.printStackTrace();
