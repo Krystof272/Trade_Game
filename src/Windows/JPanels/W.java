@@ -19,7 +19,7 @@ public class W extends JPanel {
         Random rnd = new Random();
 
         g2d.setColor(new Color(rnd.nextInt(255), rnd.nextInt(255), rnd.nextInt(255), 255));
-        g2d.setFont(new Font("Times New Roman", Font.BOLD, 100));
-        g2d.drawString("W", getWidth() / 2, getHeight() / 2);
+        g2d.setFont(new Font("Times New Roman", Font.BOLD, 150));
+        g2d.drawString("WIN", getWidth() / 2 - 170, getHeight() / 2 + 40);
     }
 }
