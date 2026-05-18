@@ -3,6 +3,10 @@ package GameMechanics;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Handles the core mechanics of the game, including buying, selling stocks,
+ * and updating the market and in-game date.
+ */
 public class GameMechanics {
     private final ArrayList<Stock> stocks;
     private final Player player;
@@ -12,6 +16,13 @@ public class GameMechanics {
         this.player = player;
     }
 
+    /**
+     * Processes a stock purchase if the player has enough money.
+     *
+     * @param shareName The name of the stock to buy.
+     * @param price     The current price per share.
+     * @param amount    The number of shares to purchase.
+     */
     public void buyStock(String shareName, int price, int amount) {
         if (player.getMoney() >= price * amount) {
             player.addStock(shareName, amount);
@@ -19,6 +30,13 @@ public class GameMechanics {
         }
     }
 
+    /**
+     * Processes a stock sale, ensuring the player doesn't sell more shares than they own.
+     *
+     * @param shareName The name of the stock to sell.
+     * @param price     The current price per share.
+     * @param amount    The number of shares to sell.
+     */
     public void sellStock(String shareName, int price, int amount) {
         if (amount > player.getAmountOfStocksOwned(shareName)) {
             amount = player.getAmountOfStocksOwned(shareName);
@@ -29,6 +47,11 @@ public class GameMechanics {
         }
     }
 
+    /**
+     * Simulates a market tick by adding a newly randomized price to each stock's history.
+     * The price fluctuation depends on the stock's inherent fluctuation rate and includes
+     * bound checks (a stock's price will never drop below 25 or exceed 5000, and crashing behavior is included).
+     */
     public void addNextNumber() {
         Random rnd = new Random();
         int number;
@@ -47,6 +70,12 @@ public class GameMechanics {
         }
     }
 
+    /**
+     * Increments the in-game calendar date by one day
+     *
+     * @param date A list representing the current date in the format [Day, Month, Year].
+     * @return The updated date list.
+     */
     public ArrayList<Integer> updateDate(ArrayList<Integer> date) {
         date.set(0, date.get(0) + 1);
         if (date.getFirst() > 30) {

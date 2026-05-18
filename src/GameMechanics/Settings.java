@@ -1,5 +1,10 @@
 package GameMechanics;
 
+/**
+ * Stores and manages game settings such as the current background,
+ * currency, and simulation delay. Also handles formatting prices 
+ * based on the active currency.
+ */
 public class Settings {
     private final String[] backgroundList;
     private String imageBackgroundName;
@@ -28,6 +33,14 @@ public class Settings {
         return currency;
     }
 
+    /**
+     * Formats a raw integer price into a readable string using the current currency,
+     * applying conversion rates, formatting with thousands separators, and 
+     * shortening large numbers.
+     *
+     * @param price The raw integer price to format.
+     * @return A formatted price string with the currency symbol appended.
+     */
     public String toStringPriceSymbol(int price) {
         int multiplication = 1;
         switch (currency) {
@@ -63,6 +76,11 @@ public class Settings {
         return moneyText + " " + currency;
     }
 
+    /**
+     * Sets a new active currency and moves it to the top of the currency list.
+     *
+     * @param currency The new currency symbol.
+     */
     public void setCurrency(String currency) {
         this.currency = currency;
         setFirst(currency, currencyList);
@@ -76,6 +94,13 @@ public class Settings {
         return currencyList;
     }
 
+    /**
+     * Reorders an array so that the specified string is at index 0,
+     * swapping it with whatever was previously at index 0.
+     *
+     * @param first The string to move to the first position.
+     * @param pole  The array to be modified.
+     */
     public void setFirst(String first, String[] pole) {
         String temp = pole[0];
         pole[0] = first;

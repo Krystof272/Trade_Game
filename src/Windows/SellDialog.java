@@ -8,7 +8,23 @@ import GameMechanics.Settings;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A dialog window that allows the user to sell a specific amount of a stock they own.
+ * The dialog displays a spinner to choose the quantity and dynamically updates
+ * the expected profit based on the current market price.
+ */
 public class SellDialog extends JDialog {
+
+    /**
+     * Constructs and displays a SellDialog.
+     *
+     * @param parent        The parent JFrame (usually the TradeWindow).
+     * @param gameMechanics The GameMechanics instance to process the transaction.
+     * @param player        The current Player, whose portfolio is checked for owned stocks.
+     * @param shareName     The name of the stock being sold.
+     * @param currentPrice  The current price of the stock per share.
+     * @param settings      The game settings (used for formatting currency).
+     */
     public SellDialog(JFrame parent, GameMechanics gameMechanics, Player player, String shareName, int currentPrice, Settings settings) {
         super(parent, "Sell " + shareName, true);
 

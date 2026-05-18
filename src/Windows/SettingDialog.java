@@ -6,7 +6,18 @@ import Others.CustomButton;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A dialog window that allows the user to configure game settings,
+ * such as the background image, active currency, and simulation speed.
+ */
 public class SettingDialog extends JDialog {
+
+    /**
+     * Constructs and displays the SettingDialog.
+     *
+     * @param owner    The parent frame that owns this dialog.
+     * @param settings The global settings object to read from and update.
+     */
     public SettingDialog(Frame owner, Settings settings) {
         super(owner, true);
         setSize(300, 160);

@@ -15,6 +15,11 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * The specific window used for trading a single stock.
+ * It displays a graphical chart of the stock's price history and
+ * provides controls for buying and selling shares.
+ */
 public class TradeWindow extends MyWindow {
     private final PaintLine paintLine;
     private final GameMechanics gameMechanics;
@@ -42,6 +47,12 @@ public class TradeWindow extends MyWindow {
         this.settings = settings;
     }
 
+    /**
+     * Initializes the UI components and layout, registers keybindings,
+     * and makes the window visible.
+     *
+     * @param stocks The full list of stocks (passed along so the back button can recreate the MainWindow).
+     */
     public void init(ArrayList<Stock> stocks) {
         setTitle("Trade Window");
         setLayout(new BorderLayout());
@@ -67,10 +78,12 @@ public class TradeWindow extends MyWindow {
 
         paintLine.paint(yHistory);
         updateText();
-
-//        new EndGame(this, date, player);
     }
 
+    /**
+     * Executes a single simulation tick. This increments the market,
+     * updates the date, repaints the chart, and refreshes all text labels.
+     */
     @Override
     public void update() {
         gameMechanics.addNextNumber();
@@ -79,6 +92,11 @@ public class TradeWindow extends MyWindow {
         updateText();
     }
 
+    /**
+     * Refreshes the text fields showing the player's money, the amount
+     * of stock they own, and the stock's current price.
+     * Also checks for the game-over condition (money < 0).
+     */
     public void updateText() {
         playerMoney.setText("Money: " + settings.toStringPriceSymbol(player.getMoney()));
         stocksOwned.setText("Owned: " + player.getAmountOfStocksOwned(shareName));
@@ -90,6 +108,10 @@ public class TradeWindow extends MyWindow {
         }
     }
 
+    /**
+     * Initializes the bottom panel containing buttons for trading
+     * (Buy, Buy 5x, Buy Max, Sell, Sell 5x, Sell Max).
+     */
     public void southComponentsInit() {
         JPanel southPanel = new JPanel();
 
@@ -104,7 +126,6 @@ public class TradeWindow extends MyWindow {
         JButton buyButton = new JButton("Buy");
         CustomButton.changeLightGray35(buyButton);
         southPanel.add(buyButton);
-
 
         JButton sellButton = new JButton("Sell");
         CustomButton.changeLightGray35(sellButton);
@@ -158,6 +179,12 @@ public class TradeWindow extends MyWindow {
         });
     }
 
+    /**
+     * Initializes the top panel containing the back button, next week button,
+     * and labels showing player stats and the current stock's name.
+     *
+     * @param stocks The full list of stocks.
+     */
     public void northComponentsInit(ArrayList<Stock> stocks) {
         JPanel northPanel = new JPanel(new BorderLayout());
 

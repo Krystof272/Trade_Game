@@ -8,12 +8,23 @@ import Windows.JPanels.W;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
+/**
+ * A dialog window that appears when the player reaches the end-game condition
+ * (e.g., triggering a money overflow or debt threshold). It calculates and displays
+ * the total in-game time elapsed since the start of the game, accompanied by a visual animation.
+ */
 public class EndGame extends JDialog {
     private W w;
     private Thread thread;
 
+    /**
+     * Constructs and displays the EndGame dialog.
+     *
+     * @param owner  The parent frame that owns this dialog.
+     * @param date   The current in-game date.
+     * @param player The current player, used to display their name.
+     */
     public EndGame(Frame owner, ArrayList<Integer> date, Player player) {
         super(owner, true);
         setSize(600, 400);
@@ -60,6 +71,14 @@ public class EndGame extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Helper method to generate the UI panel that contains the congratulatory text
+     * and the total elapsed in-game time.
+     *
+     * @param date   The calculated elapsed time as [Days, Months, Years].
+     * @param player The player object containing the username.
+     * @return A constructed JPanel with the appropriate labels.
+     */
     private static JPanel getJPanel(ArrayList<Integer> date, Player player) {
         JPanel gridPanel = new JPanel(new GridLayout(2, 1));
         JLabel congratulations = new JLabel("You won!!!    " + player.getName());
@@ -76,6 +95,10 @@ public class EndGame extends JDialog {
         return gridPanel;
     }
 
+    /**
+     * The run loop for the animation thread. Continuously calls the paint
+     * method on the 'W' panel to animate the text until the thread is stopped.
+     */
     public void run() {
         while (thread != null) {
             w.paint();

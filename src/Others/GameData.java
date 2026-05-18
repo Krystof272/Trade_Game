@@ -41,7 +41,7 @@ public class GameData {
             //Přečte celý JSON a vytvoří instanci Game.GameData, naplní vlastnosti podle názvů klíčů v JSONU, vrátí se hotová třída Game.GameData
             return mapper.readValue(is, GameData.class);
         } catch (Exception e) {
-            throw new RuntimeException("Chyba při načítání JSON: " + e.getMessage());
+            throw new RuntimeException("Error loading JSON: " + e.getMessage());
         }
     }
 

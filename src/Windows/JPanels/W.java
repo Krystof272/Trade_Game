@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * A custom JPanel that continuously draws the word "WIN" in random colors.
+ * Used primarily in the EndGame dialog to create a celebration effect.
+ */
 public class W extends JPanel {
     public W() {
     }
@@ -12,6 +16,12 @@ public class W extends JPanel {
         repaint();
     }
 
+    /**
+     * Paints the component, drawing "WIN" in the center with a
+     * randomly generated color.
+     *
+     * @param g The Graphics context to draw on.
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

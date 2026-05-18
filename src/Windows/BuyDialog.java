@@ -8,7 +8,23 @@ import Others.CustomButton;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A dialog window that allows the user to buy a specific amount of a stock.
+ * The dialog displays a spinner to choose the quantity and dynamically updates
+ * the total cost based on the current market price.
+ */
 public class BuyDialog extends JDialog {
+
+    /**
+     * Constructs and displays a BuyDialog.
+     *
+     * @param parent        The parent JFrame (usually the TradeWindow).
+     * @param gameMechanics The GameMechanics instance to process the transaction.
+     * @param player        The current Player.
+     * @param shareName     The name of the stock being purchased.
+     * @param currentPrice  The current price of the stock per share.
+     * @param settings      The game settings (used for formatting currency).
+     */
     public BuyDialog(JFrame parent, GameMechanics gameMechanics, Player player, String shareName, int currentPrice, Settings settings) {
         super(parent, "Buy " + shareName, true);
 

@@ -18,6 +18,11 @@ import java.io.File;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
+/**
+ * The main dashboard window of the game. It displays an overview of all
+ * available stocks, the player's total money, the current in-game date,
+ * and allows the player to advance the week or open detailed stock views.
+ */
 public class MainWindow extends MyWindow {
     private final GameMechanics gameMechanics;
     private final JButton button2;
@@ -29,6 +34,15 @@ public class MainWindow extends MyWindow {
     private final JLabel dateLabel;
     private final Settings settings;
 
+    /**
+     * Constructs the main dashboard window.
+     *
+     * @param gameMechanics The core game logic handler.
+     * @param stocks        The list of all stocks available in the game.
+     * @param player        The current player.
+     * @param date          The current in-game date.
+     * @param settings      The game settings (e.g., currency, background).
+     */
     public MainWindow(GameMechanics gameMechanics, ArrayList<Stock> stocks, Player player, ArrayList<Integer> date, Settings settings) {
         this.gameMechanics = gameMechanics;
         this.button2 = new JButton("Next Week");
@@ -41,10 +55,18 @@ public class MainWindow extends MyWindow {
         this.settings = settings;
     }
 
+    /**
+     * Executes the initial startup logic. For example, automatically advancing
+     * the game by one week to generate the first set of price changes.
+     */
     public void firstStart() {
         run(disabledButtons, settings);
     }
 
+    /**
+     * Initializes the UI layout, loads the background image, sets up the
+     * top settings bar, the central dashboard grid, and the bottom control panel.
+     */
     public void init() {
         setTitle("Trade Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -88,6 +110,12 @@ public class MainWindow extends MyWindow {
         setVisible(true);
     }
 
+    /**
+     * Initializes and adds the bottom panel containing the date display,
+     * the "Next Week" button, and the player's total money.
+     *
+     * @param backgroundPanel The parent panel to add the bottom controls to.
+     */
     public void southPanel(BackgroundPanel backgroundPanel) {
         JPanel southPanel = new JPanel(new GridLayout(1, 5));
         southPanel.setOpaque(false);
@@ -122,6 +150,12 @@ public class MainWindow extends MyWindow {
         backgroundPanel.add(southPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Initializes the central dashboard grid. It iterates through all available stocks,
+     * creates a StockPanel for each, and adds them to the main layout.
+     *
+     * @param backgroundPanel The parent panel to add the stock grid to.
+     */
     public void dashboardPanel(BackgroundPanel backgroundPanel) {
         JPanel dashboardPanel = new JPanel(new GridLayout(2, stocks.size() / 2));
         dashboardPanel.setOpaque(false);
@@ -147,6 +181,10 @@ public class MainWindow extends MyWindow {
         updateText();
     }
 
+    /**
+     * Executes a single simulation tick. This increments the market,
+     * updates the in-game date, and refreshes the UI text.
+     */
     @Override
     public void update() {
         gameMechanics.addNextNumber();
@@ -154,6 +192,11 @@ public class MainWindow extends MyWindow {
         updateText();
     }
 
+    /**
+     * Refreshes the date label and iterates through all stock panels on the dashboard
+     * to update their displayed price. It compares the current price with the price
+     * from 7 days ago to show a green 'up' arrow or a red 'down' arrow.
+     */
     public void updateText() {
         int priceNow;
         int priceBefore;

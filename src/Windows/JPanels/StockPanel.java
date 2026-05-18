@@ -5,6 +5,11 @@ import Others.CustomButton;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A custom JPanel that displays summary information for a single stock
+ * on the dashboard, including its name, current price, and a button
+ * for opening a detailed view.
+ */
 public class StockPanel extends JPanel {
     private final JButton button;
     private final JLabel labelPrice;
@@ -16,6 +21,10 @@ public class StockPanel extends JPanel {
         this.labelName = labelName;
     }
 
+    /**
+     * Initializes the panel's layout, adds the components, and applies
+     * styling (fonts, colors, and background).
+     */
     public void init(){
         setLayout(new GridLayout(3, 1));
 
